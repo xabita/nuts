@@ -28,5 +28,5 @@ class CourseModule(models.Model):
 class Resource(models.Model):
 	title = models.CharField(max_length=100)
 	courseModule = models.ForeignKey('CourseModule', blank = True, null = True)
-	escription = models.TextField()
+	description = models.TextField()
 '''

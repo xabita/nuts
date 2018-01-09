@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'nuts.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'nuts',
             'USER': 'user_nuts',
             'PASSWORD': 'user_nuts',
             'HOST': 'localhost',
-            'PORT': '',
+            'PORT': '5432',
         }
 }
 
