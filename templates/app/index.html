@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{title}}</title>
+</head>
+<body>
+ 	{% lscourses in list_courses %}
+
+ 		<div>{{ lscourses.name }}</div>
+ 		<div>{{ lscourses.description }}</div>
+            
+    {% endfor %}
+</body>
+</html>

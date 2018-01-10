@@ -16,6 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+from django.conf import settings
+#from django.conf.urls.static import static
+from django.views.static import serve
+from django.conf.urls import include, url
+
+
+from django.contrib.auth import views as auth_views
+
+
+
+# IMPORT OTHER URLS APPS
+from apps.courses import urls as courses_urls
+#from apps.users import urls as users_urls
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+    #path('admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include(courses_urls)),
+ #   url(r'^', include(users_urls)),
+
+] 
+#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

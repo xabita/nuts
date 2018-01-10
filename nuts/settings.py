@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'course',
-    'user',
+    'apps.courses',
+    'apps.users',
 
 ]
 
@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'nuts.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'nuts',
-            'USER': 'user_nuts',
-            'PASSWORD': 'user_nuts',
+            'NAME': 'nutss',
+            'USER': 'user_nutss',
+            'PASSWORD': 'user_nutss',
             'HOST': 'localhost',
             'PORT': '5432',
         }
