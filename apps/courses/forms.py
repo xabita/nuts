@@ -15,3 +15,16 @@ class CourseForm(forms.ModelForm):
 		model = Course
 		fields = ('name','description', 'usercourse',)
 
+
+class CourseModuleForm(forms.ModelForm):
+	
+	class Meta:
+		model = CourseModule
+		fields = ('name','description', 'objective', 'time', 'course',)
+
+
+class ResourceForm(forms.ModelForm):
+	
+	class Meta:
+		model = Resource
+		fields = ('title','url_video', 'courseModule', 'description',)
