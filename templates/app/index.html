@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{title}}</title>
-</head>
-<body>
- 	{% lscourses in list_courses %}
+{% extends 'app/base.html' %}
 
- 		<div>{{ lscourses.name }}</div>
- 		<div>{{ lscourses.description }}</div>
-            
-    {% endfor %}
-</body>
-</html>
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+  <h2 style="margin-top:3em;">Cursos Disponibles</h2>
+  {%for lscourses in list_courses %}
+  <ul class="list-group">
+    <li class="list-group-item">{{ lscourses.name }} ({{ lscourses.description }})</li>
+  </ul>
+  {% endfor %}
+</div>
+
+{% endblock content %}
