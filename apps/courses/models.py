@@ -4,9 +4,8 @@ from django.db import models
 from apps.users.models import UserCourse
 
 # DEPENDENCIES TO MAKE UNIQUE SLUG BY POST
-from autoslug import AutoSlugField
+#from autoslug import AutoSlugField
 #from django.template.defaultfilters import slugify
-
 
 # Create your models here.
 
@@ -16,7 +15,7 @@ class Course(models.Model):
 	usercourse = models.ForeignKey('users.UserCourse', on_delete=models.CASCADE, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	slug = AutoSlugField( populate_from='name', max_length=100, always_update=True, unique=True)
+#	slug = AutoSlugField( populate_from='name', max_length=100, always_update=True, unique=True)
 	
 
 	def __str__(self):

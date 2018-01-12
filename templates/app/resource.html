@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<h1 style="margin-top:5em;">Crear Curso</h1>
+<h1 style="margin-top:5em;">Agregar recursos</h1>
 <div class="page-section section pt-100 pb-100">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="login-reg-form"> 
-                    <form class="post-form" method="POST" action="{% url 'add_courses' %}">
+                    <form class="post-form" method="POST" action="{% url 'add_resource' %}">
                         {% csrf_token %}
                         <div class="row">
                         	{{ form.as_p }}                 

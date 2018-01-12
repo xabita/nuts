@@ -6,15 +6,13 @@ from .models import Course, CourseModule, Resource
 # CONTENT FORMS
 # -----------------------------------------------------------------------------
 class CourseForm(forms.ModelForm):
-	'''comment = 	forms.CharField(
+	description = 	forms.CharField(
 					widget=forms.Textarea(attrs={'class': 'form-control'}),
-					label="Comentario",
-				)'''
-
+					label="Descripción",
+				)
 	class Meta:
 		model = Course
 		fields = ('name','description', 'usercourse',)
-
 
 class CourseModuleForm(forms.ModelForm):
 	
