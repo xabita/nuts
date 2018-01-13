@@ -33,7 +33,9 @@ def add_courses(request):
 			#product_tmp = Product.objects.get(pk=request.POST.get("product",))
 			#comment.product = product_tmp
 			course.save()
-			return redirect('home')
+			return course_detail(request, course.id)
+
+			#return redirect('home')
 	else:
 		return redirect('home')
 
@@ -52,12 +54,12 @@ def add_course_module(request):
 		form = CourseModuleForm(request.POST)
 		if form.is_valid():
 			course_module = form.save(commit=False)
-			#product_tmp = Product.objects.get(pk=request.POST.get("product",))
-			#comment.product = product_tmp
 			course_module.save()
-			return redirect('home')
+			return course_detail(request, course_module.course.pk)
 	else:
 		return redirect('home')
+
+
 
 def new_resource(request):
 	index_template = "app/resource.html"
@@ -80,13 +82,20 @@ def add_resource(request):
 	else:
 		return redirect('home')
 
-def course_detail(request):
-	post = get_object_or_404(POST)
-	modules = CourseModule.objects.filter(post = post).order_by('-created_at')[:10]
-	
-	return render(request, 'app/course_detail.html', {
-		'gets': get,
-		'modules': modules,
-		'title_page': post.title,
-	})
+def course_detail(request, pk):
+	try:
+		course = get_object_or_404(Course, pk=pk)
+		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
+		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
+		coursesmodule_form = CourseModuleForm()
 
+
+	except Course.DoesNotExist:
+		raise Http404("Course does not exist")
+
+	return render(request, 'app/course_detail.html', {
+		'modules': modules,
+		'list_courses': list_courses,
+		'title_page': Course.name,
+		'form': coursesmodule_form,
+	})

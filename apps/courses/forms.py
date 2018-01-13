@@ -15,6 +15,17 @@ class CourseForm(forms.ModelForm):
 		fields = ('name','description', 'usercourse',)
 
 class CourseModuleForm(forms.ModelForm):
+	description = 	forms.CharField(
+					widget=forms.Textarea(attrs={'class': 'form-control'}),
+					label="Descripción",)
+	objective = 	forms.CharField(
+					widget=forms.Textarea(attrs={'class': 'form-control'}),
+					label="Objetivo del curso",
+					)
+	time = 	forms.CharField(
+					widget=forms.TextInput(attrs={'class': 'form-control'}),
+					label="Duración",
+					)
 	
 	class Meta:
 		model = CourseModule

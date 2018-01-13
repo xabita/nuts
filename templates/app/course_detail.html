@@ -4,6 +4,19 @@
 
 {% block content %}
 
+
+<div class="container">
+  <h2 style="margin-top:6em;">Modulos del curso {{ list_courses.title }}</h2>
+   {{ list_courses.pk }}
+  {% for c_mod in modules %}
+
+      <ul class="list-group">
+        <li class="list-group-item"><a href="{% url 'new_resource' pk=c_mod.pk %}">{{ c_mod.name }} ({{ c_mod.description }})</a></li>
+      </ul>
+  {% endfor %}
+</div>
+
+
 <h1 style="margin-top:5em;">Agregar Modulos</h1>
 <div class="page-section section pt-100 pb-100">
     <div class="container">
@@ -24,4 +37,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
