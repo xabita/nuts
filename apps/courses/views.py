@@ -30,12 +30,8 @@ def add_courses(request):
 		form = CourseForm(request.POST)
 		if form.is_valid():
 			course = form.save(commit=False)
-			#product_tmp = Product.objects.get(pk=request.POST.get("product",))
-			#comment.product = product_tmp
 			course.save()
 			return course_detail(request, course.id)
-
-			#return redirect('home')
 	else:
 		return redirect('home')
 
@@ -60,8 +56,7 @@ def add_course_module(request):
 		return redirect('home')
 
 
-
-def new_resource(request):
+def new_resource(request, pk):
 	index_template = "app/resource.html"
 	resource_form = ResourceForm()
 	
@@ -82,6 +77,7 @@ def add_resource(request):
 	else:
 		return redirect('home')
 
+
 def course_detail(request, pk):
 	try:
 		course = get_object_or_404(Course, pk=pk)
@@ -99,3 +95,22 @@ def course_detail(request, pk):
 		'title_page': Course.name,
 		'form': coursesmodule_form,
 	})
+
+def module_detail(request, pk):
+	try:
+		module = get_object_or_404(CourseModule, pk=pk)
+		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
+		#resources = Resource.objects.filter(module = module).order_by('-created_at')[:10]
+		#resource_form = ResourceForm()
+
+
+	except CourseModule.DoesNotExist:
+		raise Http404("Course does not exist")
+
+	return render(request, 'app/module_detail.html', {
+		#'resources': resources,
+		'list_module': list_module,
+		'title_page': module.name,
+		'form': resource_form,
+	})
+

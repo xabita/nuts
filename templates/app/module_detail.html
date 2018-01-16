@@ -6,18 +6,18 @@
 
 
 <div class="container">
-  <h2 style="margin-top:6em;">Modulos del curso {{ list_courses.title }}</h2>
-  {{ list_courses.pk }}
-  {% for c_mod in modules %}
+  <h2 style="margin-top:6em;">Contenido del curso {{ list_module.title }}</h2>
+  {{ list_module.pk }}
+  {% for c_mod in resources %}
 
       <ul class="list-group">
-        <li class="list-group-item"><a href="{% url 'module_detail' pk=list_courses.pk %}">{{ c_mod.name }} ({{ c_mod.description }})</a></li>
+        <li class="list-group-item"><a href="#">{{ c_mod.name }} ({{ c_mod.description }})</a></li>
       </ul>
   {% endfor %}
 </div>
 
 
-<h1 style="margin-top:5em;">Agregar Modulos</h1>
+<h1 style="margin-top:5em;">Agregar Contenido</h1>
 <div class="page-section section pt-100 pb-100">
     <div class="container">
         <div class="row">

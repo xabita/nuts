@@ -26,7 +26,6 @@ class CourseModuleForm(forms.ModelForm):
 					widget=forms.TextInput(attrs={'class': 'form-control'}),
 					label="Duración",
 					)
-	
 	class Meta:
 		model = CourseModule
 		fields = ('name','description', 'objective', 'time', 'course',)
@@ -36,4 +35,5 @@ class ResourceForm(forms.ModelForm):
 	
 	class Meta:
 		model = Resource
-		fields = ('title','url_video', 'courseModule', 'description',)
+		fields = ('title','url_video', 'courseModule')
+

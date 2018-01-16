@@ -7,6 +7,15 @@ from apps.users.models import UserCourse
 #from autoslug import AutoSlugField
 #from django.template.defaultfilters import slugify
 
+
+CATEGORY_CHOICES = (
+    (1, 'Texto'),
+    (2, 'Codigo'),
+    (3, 'Video'),
+    (4, 'Audio'),
+    (5, 'links')
+)
+
 # Create your models here.
 
 class Course(models.Model):
@@ -44,7 +53,8 @@ class Resource(models.Model):
 	title = models.CharField(max_length=100)
 	url_video = models.URLField(default="")
 	courseModule = models.ForeignKey('CourseModule', on_delete=models.CASCADE, blank = True, null = True)
-	description = models.TextField()
+	content = models.TextField()
+	category = models.IntegerField(default = 1, choices=CATEGORY_CHOICES)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
