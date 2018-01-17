@@ -18,7 +18,7 @@ class CourseModuleAdmin(admin.ModelAdmin):
 	list_filter = ('created_at',)
 
 class ResourceAdmin(admin.ModelAdmin):
-	list_display = ('title', 'url_video', 'courseModule', 'category', 'updated_at',  )
+	list_display = ('title', 'url_video', 'courseModule','content', 'category', 'updated_at',  )
 	formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget },
     }

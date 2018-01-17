@@ -35,5 +35,5 @@ class ResourceForm(forms.ModelForm):
 	
 	class Meta:
 		model = Resource
-		fields = ('title','url_video', 'courseModule')
+		fields = ('title','url_video', 'courseModule', 'content', 'category')
 

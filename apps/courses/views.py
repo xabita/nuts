@@ -100,17 +100,15 @@ def module_detail(request, pk):
 	try:
 		module = get_object_or_404(CourseModule, pk=pk)
 		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
-		#resources = Resource.objects.filter(module = module).order_by('-created_at')[:10]
-		#resource_form = ResourceForm()
-
+		resources = Resource.objects.filter(courseModule = module).order_by('-created_at')[:10]
+		resource_form = ResourceForm()
 
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
 
 	return render(request, 'app/module_detail.html', {
-		#'resources': resources,
+		'resources': resources,
 		'list_module': list_module,
-		'title_page': module.name,
 		'form': resource_form,
 	})
 
