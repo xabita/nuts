@@ -9,10 +9,8 @@ urlpatterns = [
     url(r'^course_module/add/$', courses_views.add_course_module, name='add_course_module'),
     url(r'^resource/new/$', courses_views.new_resource, name='new_resource'),
     url(r'^resource/add/$', courses_views.add_resource, name='add_resource'),
-	
-	url(r'^course/detail/(?P<pk>[0-9]+)/$', courses_views.course_detail, name='course_detail'),
-    url(r'^module/detail/(?P<pk>[0-9]+)/$', courses_views.module_detail, name='module_detail'),
-
-
+	url(r'^course/modules/(?P<pk>[0-9]+)/$', courses_views.course_modules, name='course_modules'),
+    url(r'^module/resources/(?P<pk>[0-9]+)/$', courses_views.module_resources, name='module_resources'),
+    url(r'^resource/detail/(?P<pk>[0-9]+)/$', courses_views.resource_detail, name='resource_detail'),
 
    ]

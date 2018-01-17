@@ -1,6 +1,8 @@
 
 from django import forms
 from .models import Course, CourseModule, Resource
+# Admin Pagedown Widget
+from pagedown.widgets import AdminPagedownWidget
 
 # -----------------------------------------------------------------------------
 # CONTENT FORMS
@@ -32,8 +34,10 @@ class CourseModuleForm(forms.ModelForm):
 
 
 class ResourceForm(forms.ModelForm):
+	content = forms.CharField (widget = AdminPagedownWidget ()) ,
 	
 	class Meta:
 		model = Resource
-		fields = ('title','url_video', 'courseModule', 'content', 'category')
+		fields = ('title','url_video', 'courseModule', 'content', 'category', )
+
 

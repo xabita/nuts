@@ -6,29 +6,29 @@
 
 
 <div class="container">
-  <h2 style="margin-top:6em;">Modulos del curso de 
-  {% for cur in list_courses %}
-    {{ cur.name }} 
-  {% endfor %}</h2>
-  
-  
-  
-  {% for c_mod in modules %}
+  <h2 style="margin-top:6em;">Contenido del curso de 
+    {% for lsmod in list_module %}
+      {{ lsmod.name }} ({{ lsmod.description }})
+  {% endfor %}
+</h2>
+
+
+  {% for c_mod in resources %}
 
       <ul class="list-group">
-        <li class="list-group-item"><a href="{% url 'module_detail' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
+        <li class="list-group-item"><a href="{% url 'resource_detail' pk=c_mod.pk %}">{{ c_mod.title }}</a></li>
       </ul>
   {% endfor %}
 </div>
 
 
-<h1 style="margin-top:5em;">Agregar Modulos</h1>
+<h1 style="margin-top:5em;">Agregar Contenido</h1>
 <div class="page-section section pt-100 pb-100">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="login-reg-form"> 
-                    <form class="post-form" method="POST" action="{% url 'add_course_module' %}">
+                    <form class="post-form" method="POST" action="{% url 'add_resource' %}">
                         {% csrf_token %}
                         <div class="row">
                         	{{ form.as_p }}                 

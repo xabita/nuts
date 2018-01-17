@@ -78,7 +78,7 @@ def add_resource(request):
 		return redirect('home')
 
 
-def course_detail(request, pk):
+def course_modules(request, pk):
 	try:
 		course = get_object_or_404(Course, pk=pk)
 		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
@@ -89,14 +89,15 @@ def course_detail(request, pk):
 	except Course.DoesNotExist:
 		raise Http404("Course does not exist")
 
-	return render(request, 'app/course_detail.html', {
+	return render(request, 'app/course_modules.html', {
 		'modules': modules,
 		'list_courses': list_courses,
 		'title_page': Course.name,
 		'form': coursesmodule_form,
 	})
 
-def module_detail(request, pk):
+
+def module_resources(request, pk):
 	try:
 		module = get_object_or_404(CourseModule, pk=pk)
 		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
@@ -106,9 +107,23 @@ def module_detail(request, pk):
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
 
-	return render(request, 'app/module_detail.html', {
+	return render(request, 'app/module_resources.html', {
 		'resources': resources,
 		'list_module': list_module,
 		'form': resource_form,
+	})
+
+
+def resource_detail(request, pk):
+	try:
+		res = get_object_or_404(Resource, pk=pk)
+		#list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
+		resources = Resource.objects.filter(pk = pk).order_by('-created_at')[:10]
+		
+	except CourseModule.DoesNotExist:
+		raise Http404("Course does not exist")
+
+	return render(request, 'app/resource_detail.html', {
+		'resources': resources,
 	})
 
