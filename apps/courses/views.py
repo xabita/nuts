@@ -13,7 +13,7 @@ def home(request):
 	
 	return render(request, index_template, {
 		'list_courses': list_courses,
-		'title_page': 'Nuts.'
+		'title_page': 'Nuts'
 	})
 
 def new_course(request):
