@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+   
+</div>
+<div class="page-section section pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+              <h2 style="margin-top:4em;"> 
+                {% for cur in list_courses %}
+                  {{ cur.name }} 
+                {% endfor %}
+              </h2> 
+              <h3 style="margin-top:2em;">Modulos</h3>
+                <div class="login-reg-form">
+                  {% if no_modules > 0 %}
+                    {% for c_mod in modules %}
+                        <ul class="list-group">
+                          <li class="list-group-item"><a href="{% url 'resources' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
+                        </ul>
+                    {% endfor %}
+                  {% else %}
+                    <h2>No se ha registrado ningún módulo</h2>
+                  {% endif %}
+
+www:--- {{IdModule}}
+                    <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdModule %}">
+                        {% csrf_token %}
+                        <div class="row">
+                        	  <div class="col-xs-12">
+                                <button type="submit" id="btn_sub" class="save btn btn-default">Nuevo Módulo</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

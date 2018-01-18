@@ -17,7 +17,7 @@ def home(request):
 	})
 
 def new_course(request):
-	index_template = "app/courses.html"
+	index_template = "app/courses_new.html"
 	courses_form = CourseForm()
 	
 	return render(request, index_template, {
@@ -31,30 +31,70 @@ def add_courses(request):
 		if form.is_valid():
 			course = form.save(commit=False)
 			course.save()
-			return course_detail(request, course.id)
+			return modules(request, course.id)
 	else:
 		return redirect('home')
 
 
-def new_course_module(request):
-	index_template = "app/course_module.html"
-	coursesmodule_form = CourseModuleForm()
-	
-	return render(request, index_template, {
-		'title_page': 'Nuts',
-		'form': coursesmodule_form,
+def modules(request, pk):
+	try:
+		course = get_object_or_404(Course, pk=pk)
+		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
+		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
+
+		no_modules= len(modules)
+		IdModule=course.id
+
+		#coursesmodule_form = CourseModuleForm()
+
+
+	except Course.DoesNotExist:
+		raise Http404("Course does not exist")
+
+	return render(request, 'app/modules.html', {
+		'modules': modules,
+		'list_courses': list_courses,
+		'title_page': Course.name,
+		'no_modules': no_modules,
+		'IdModule': IdModule,
 	})
 
-def add_course_module(request):
+
+def modules_new(request,pk):
+	index_template = "app/modules_new.html"
+	coursesmodule_form = CourseModuleForm()
+	
+	return render(request, index_template,{
+		'title_page': 'Nuts',
+		'form': coursesmodule_form,
+		'idCourse': pk,
+	})
+
+def modules_add(request, pk):
 	if request.method == "POST":
 		form = CourseModuleForm(request.POST)
 		if form.is_valid():
 			course_module = form.save(commit=False)
 			course_module.save()
-			return course_detail(request, course_module.course.pk)
+			return resources(request, course_module.id)
 	else:
 		return redirect('home')
 
+def resources(request, pk):
+	try:
+		module = get_object_or_404(CourseModule, pk=pk)
+		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
+		resources = Resource.objects.filter(courseModule = module).order_by('-created_at')[:10]
+		resource_form = ResourceForm()
+
+	except CourseModule.DoesNotExist:
+		raise Http404("Course does not exist")
+
+	return render(request, 'app/resources.html', {
+		'resources': resources,
+		'list_module': list_module,
+		'form': resource_form,
+	})
 
 def new_resource(request, pk):
 	index_template = "app/resource.html"
@@ -78,40 +118,10 @@ def add_resource(request):
 		return redirect('home')
 
 
-def course_modules(request, pk):
-	try:
-		course = get_object_or_404(Course, pk=pk)
-		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
-		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
-		coursesmodule_form = CourseModuleForm()
 
 
-	except Course.DoesNotExist:
-		raise Http404("Course does not exist")
-
-	return render(request, 'app/course_modules.html', {
-		'modules': modules,
-		'list_courses': list_courses,
-		'title_page': Course.name,
-		'form': coursesmodule_form,
-	})
 
 
-def module_resources(request, pk):
-	try:
-		module = get_object_or_404(CourseModule, pk=pk)
-		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
-		resources = Resource.objects.filter(courseModule = module).order_by('-created_at')[:10]
-		resource_form = ResourceForm()
-
-	except CourseModule.DoesNotExist:
-		raise Http404("Course does not exist")
-
-	return render(request, 'app/module_resources.html', {
-		'resources': resources,
-		'list_module': list_module,
-		'form': resource_form,
-	})
 
 
 def resource_detail(request, pk):
@@ -123,7 +133,7 @@ def resource_detail(request, pk):
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
 
-	return render(request, 'app/resource_detail.html', {
+	return render(request, 'app/resources_detail.html', {
 		'resources': resources,
 	})
 

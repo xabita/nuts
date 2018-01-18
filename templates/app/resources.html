@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+  
+
+
+
+<div class="page-section section pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+              <h2 style="margin-top:4em;">
+                {% for lsmod in list_module %}
+                  {{ lsmod.name }}
+                {% endfor %}
+              </h2>
+
+              <h1 style="margin-top:2em;">Contenido</h1>
+          
+                <div class="login-reg-form"> 
+                  {% for c_mod in resources %}
+                      <ul class="list-group">
+                        <li class="list-group-item"><a href="{% url 'resource_detail' pk=c_mod.pk %}">{{ c_mod.title }}</a></li>
+                      </ul>
+                  {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
