@@ -15,16 +15,16 @@
                   {{ lsmod.name }}
                 {% endfor %}
               </h2>
-
-              <h1 style="margin-top:2em;">Contenido</h1>
+              <div class="login-reg-form"> 
                   {% if no_resources > 0 %}
-                    <div class="login-reg-form"> 
+                  <h1 style="margin-top:2em;">Contenido</h1>
+                  
                       {% for resource in resources %}
                           <ul class="list-group">
                             <li class="list-group-item"><a href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></li>
                           </ul>
                       {% endfor %}
-                    </div>
+                    
                   {% else %}
                     <h2>No se encontró contenido para este módulo</h2>
                   {% endif %}
@@ -38,6 +38,7 @@
                       </div>
                   </form>
 
+              </div>
             </div>
         </div>
     </div>

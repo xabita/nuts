@@ -127,11 +127,13 @@ def resource_detail(request, pk):
 		res = get_object_or_404(Resource, pk=pk)
 		#list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
 		resources = Resource.objects.filter(pk = pk).order_by('-created_at')[:10]
+		Urlvideo=res.url_video
 		
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
 
 	return render(request, 'app/resources_detail.html', {
 		'resources': resources,
+		'Urlvideo': Urlvideo,
 	})
 

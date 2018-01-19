@@ -21,9 +21,10 @@ class CourseModuleAdmin(admin.ModelAdmin):
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    form = ResourceForm
-    fields = ('title', 'url_video', 'courseModule','content', 'category', )
-	#list_display = ('title', 'url_video', 'courseModule','content', 'category', 'updated_at',  )
+	list_display = ('title', 'url_video', 'courseModule','content', 'category', 'updated_at', )
+	form = ResourceForm
+	fields = ('title', 'url_video', 'courseModule','content', 'category', )
+	#
 	#formfield_overrides = {
     #    models.TextField: {'widget': AdminPagedownWidget },
     #}

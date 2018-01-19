@@ -17,22 +17,23 @@
                   {{ cur.name }} 
                 {% endfor %}
               </h2> 
-              <h3 style="margin-top:2em;">Modulos</h3>
                 <div class="login-reg-form">
                   {% if no_modules > 0 %}
+                  <h3 style="margin-top:2em;">Modulos</h3>
+              
                     {% for c_mod in modules %}
                         <ul class="list-group">
                           <li class="list-group-item"><a href="{% url 'resources' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
                         </ul>
                     {% endfor %}
                   {% else %}
-                    <h2>No se ha registrado ningún módulo</h2>
+                    <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
                       {% csrf_token %}
                       <div class="row">
                       	  <div class="col-xs-12">
-                              <button type="submit" id="btn_sub" class="save btn btn-default">Nuevo Módulo</button>
+                              <button type="submit" id="btn_sub" class="save btn btn-default">Agregar Módulo</button>
                           </div>
                       </div>
                   </form>
