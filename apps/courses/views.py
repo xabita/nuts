@@ -41,13 +41,8 @@ def modules(request, pk):
 		course = get_object_or_404(Course, pk=pk)
 		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
-
 		no_modules= len(modules)
-		IdModule=course.id
-
-		#coursesmodule_form = CourseModuleForm()
-
-
+		IdCourse=course.id
 	except Course.DoesNotExist:
 		raise Http404("Course does not exist")
 
@@ -56,7 +51,7 @@ def modules(request, pk):
 		'list_courses': list_courses,
 		'title_page': Course.name,
 		'no_modules': no_modules,
-		'IdModule': IdModule,
+		'IdCourse': IdCourse,
 	})
 
 
@@ -73,8 +68,11 @@ def modules_new(request,pk):
 def modules_add(request, pk):
 	if request.method == "POST":
 		form = CourseModuleForm(request.POST)
+		course = Course.objects.get(pk=pk)
 		if form.is_valid():
 			course_module = form.save(commit=False)
+			course_module.save()
+			course_module.course=course
 			course_module.save()
 			return resources(request, course_module.id)
 	else:
@@ -85,6 +83,9 @@ def resources(request, pk):
 		module = get_object_or_404(CourseModule, pk=pk)
 		list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
 		resources = Resource.objects.filter(courseModule = module).order_by('-created_at')[:10]
+		no_resources= len(resources)
+		IdModule=module.id
+		
 		resource_form = ResourceForm()
 
 	except CourseModule.DoesNotExist:
@@ -94,35 +95,32 @@ def resources(request, pk):
 		'resources': resources,
 		'list_module': list_module,
 		'form': resource_form,
+		'no_resources': no_resources,
+		'IdModule': IdModule,
 	})
 
-def new_resource(request, pk):
-	index_template = "app/resource.html"
+def resource_new(request, pk):
+	index_template = "app/resources_new.html"
 	resource_form = ResourceForm()
 	
 	return render(request, index_template, {
 		'title_page': 'Nuts',
 		'form': resource_form,
+		'IdModule': pk,
 	})
 
-def add_resource(request):
+def resource_add(request,pk):
 	if request.method == "POST":
 		form = ResourceForm(request.POST)
+		module = CourseModule.objects.get(pk=pk)
 		if form.is_valid():
 			resource = form.save(commit=False)
-			#product_tmp = Product.objects.get(pk=request.POST.get("product",))
-			#comment.product = product_tmp
 			resource.save()
-			return redirect('home')
+			resource.courseModule=module
+			resource.save()
+			return resource_detail(request, resource.id)
 	else:
 		return redirect('home')
-
-
-
-
-
-
-
 
 def resource_detail(request, pk):
 	try:

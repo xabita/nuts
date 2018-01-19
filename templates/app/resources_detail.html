@@ -3,31 +3,23 @@
 {% load staticfiles %}
 {% load markdown_deux_tags%} 
 {% block content %}
-  <div class="container">
-    <h2 style="margin-top:6em;">Contenido del curso de </h2>
-  </div>
 
-
-<h1 style="margin-top:5em;">Recurso</h1>
 <div class="page-section section pt-100 pb-100">
-    <div class="container">
+    <div class="container" style="margin-top:3em;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="login-reg-form"> 
-                   
-           {% for res in resources %}
-
-      <ul class="list-group">
-        <li class="list-group-item">{{ res.title }}
-          <p> {{res.content | markdown}} </ p> 
-        </li>
-      </ul>
-  {% endfor %} 
-
+                <h1>{% for res in resources %}{{ res.title }}{% endfor %}</h1>
+                  {% for res in resources %}
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <p> {{res.content | markdown}} </ p> 
+                        </li>
+                      </ul>
+                  {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}

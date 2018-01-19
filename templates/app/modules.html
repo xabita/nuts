@@ -28,16 +28,14 @@
                   {% else %}
                     <h2>No se ha registrado ningún módulo</h2>
                   {% endif %}
-
-www:--- {{IdModule}}
-                    <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdModule %}">
-                        {% csrf_token %}
-                        <div class="row">
-                        	  <div class="col-xs-12">
-                                <button type="submit" id="btn_sub" class="save btn btn-default">Nuevo Módulo</button>
-                            </div>
-                        </div>
-                    </form>
+                  <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
+                      {% csrf_token %}
+                      <div class="row">
+                      	  <div class="col-xs-12">
+                              <button type="submit" id="btn_sub" class="save btn btn-default">Nuevo Módulo</button>
+                          </div>
+                      </div>
+                  </form>
                 </div>
             </div>
         </div>

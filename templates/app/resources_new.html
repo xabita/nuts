@@ -11,7 +11,7 @@
               <h1 style="margin-top:2em;">Agregar Contenido</h1>
           
                 <div class="login-reg-form"> 
-                    <form class="post-form" method="POST" action="{% url 'add_resource' %}">
+                    <form class="post-form" method="POST" action="{% url 'resource_add' pk=IdModule %}">
                         {% csrf_token %}
                         <div class="row">
                             {{ form.as_p }}                 

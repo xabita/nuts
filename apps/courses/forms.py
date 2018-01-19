@@ -30,15 +30,13 @@ class CourseModuleForm(forms.ModelForm):
 					)
 	class Meta:
 		model = CourseModule
-		fields = ('name','description', 'objective', 'time', 'course' )
+		fields = ('name','description', 'objective', 'time' )
 	
-	
-
 class ResourceForm(forms.ModelForm):
 	content = forms.CharField (widget = AdminPagedownWidget ()) ,
 	
 	class Meta:
 		model = Resource
-		fields = ('title','url_video', 'courseModule', 'content', 'category', )
+		fields = ('title','url_video', 'content', 'category', )
 
 	

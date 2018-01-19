@@ -4,11 +4,7 @@
 
 {% block content %}
 
-
 <div class="container">
-  
-
-
 
 <div class="page-section section pt-100 pb-100">
     <div class="container">
@@ -21,16 +17,27 @@
               </h2>
 
               <h1 style="margin-top:2em;">Contenido</h1>
-          
-                <div class="login-reg-form"> 
-                  {% for c_mod in resources %}
-                      <ul class="list-group">
-                        <li class="list-group-item"><a href="{% url 'resource_detail' pk=c_mod.pk %}">{{ c_mod.title }}</a></li>
-                      </ul>
-                  {% endfor %}
+                  {% if no_resources > 0 %}
+                    <div class="login-reg-form"> 
+                      {% for resource in resources %}
+                          <ul class="list-group">
+                            <li class="list-group-item"><a href="{% url 'resource_detail' pk=resource.pk %}">{{ resource.title }}</a></li>
+                          </ul>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <h2>No se encontró contenido para este módulo</h2>
+                  {% endif %}
 
+                  <form class="post-form" method="POST" action="{% url 'resource_new' pk=IdModule %}">
+                      {% csrf_token %}
+                      <div class="row">
+                          <div class="col-xs-12">
+                              <button type="submit" id="btn_sub" class="save btn btn-default">Agregar contenido</button>
+                          </div>
+                      </div>
+                  </form>
 
-                </div>
             </div>
         </div>
     </div>
