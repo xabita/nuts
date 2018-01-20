@@ -29,13 +29,16 @@ from django.contrib.auth import views as auth_views
 
 # IMPORT OTHER URLS APPS
 from courses import urls as courses_urls
+from users import urls as users_urls
+
 #from apps.users import urls as users_urls
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^', include(courses_urls)),
- #   url(r'^', include(users_urls)),
+    url(r'^', include(users_urls)),
+
 
 ] 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

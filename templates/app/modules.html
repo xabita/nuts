@@ -29,6 +29,10 @@
                   {% else %}
                     <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
+
+
+
+                  {% if request.session.user_type == 2 %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
                       {% csrf_token %}
                       <div class="row">
@@ -37,6 +41,7 @@
                           </div>
                       </div>
                   </form>
+                  {% endif %}
                 </div>
             </div>
         </div>

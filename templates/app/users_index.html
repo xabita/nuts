@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+
+<div class="container">
+  <h2 style="margin-top:4em;">Usuarios registrados</h2>
+  {%for lsusers in list_users %}
+  <ul class="list-group">
+    <li class="list-group-item"><a href="">{{ lsusers.first_name }} {{ lsusers.last_name }}</a></li>
+
+
+  </ul>
+  {% endfor %}
+</div>
+
+{% endblock content %}

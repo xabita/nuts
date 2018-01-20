@@ -56,10 +56,20 @@
                             <li>
                                 <a href="{% url 'home' %}">Inicio</a>
                             </li>
+                            {% if request.session.user_type == 1 %}
                             <li>
                                 <a href="{% url 'new_course' %}">Crear curso</a>
                                 
                             </li>
+                            <li>
+                                <a href="{% url 'home_users' %}">Usuarios</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users_new' %}">Crear Usuarios</a>
+                            </li>
+                            {% endif %}
+                            
+
                             <li>
                                 <a href="{% url 'home' %}">Cerrar Sesion</a>
                             </li> 

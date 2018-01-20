@@ -10,6 +10,11 @@ from .forms import CourseForm, CourseModuleForm, ResourceForm
 def home(request):
 	index_template = "app/index.html"
 	list_courses = Course.objects.all().order_by('-created_at')
+
+	name="Elizabeth"
+	request.session['user_cur'] = name
+	request.session['session_estatus'] = True;
+	request.session['user_type'] = 1;
 	
 	return render(request, index_template, {
 		'list_courses': list_courses,
@@ -127,7 +132,7 @@ def resource_detail(request, pk):
 		res = get_object_or_404(Resource, pk=pk)
 		#list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
 		resources = Resource.objects.filter(pk = pk).order_by('-created_at')[:10]
-		Urlvideo=res.url_video
+		Urlvideo=res
 		
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
@@ -136,4 +141,3 @@ def resource_detail(request, pk):
 		'resources': resources,
 		'Urlvideo': Urlvideo,
 	})
-
