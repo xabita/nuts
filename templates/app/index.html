@@ -4,15 +4,12 @@
 
 {% block content %}
 
-
 <div class="container">
   <h2 style="margin-top:4em;">Cursos Disponibles</h2>
   {%for lscourses in list_courses %}
-  <ul class="list-group">
-    <li class="list-group-item"><a href="{% url 'modules' pk=lscourses.pk %}">{{ lscourses.name }} ({{ lscourses.description }})</a></li>
-
-
-  </ul>
+	  <ul class="list-group">
+	    <li class="list-group-item"><a href="{% url 'modules' pk=lscourses.pk %}">{{ lscourses.name }} ({{ lscourses.description }})</a></li>
+	  </ul>
   {% endfor %}
 </div>
 

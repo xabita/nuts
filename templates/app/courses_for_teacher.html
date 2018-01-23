@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+  <h2 style="margin-top:4em;">
+ 	  {{ user_data.first_name }} {{ user_data.last_name }}
+</h2>
+
+	{% if list_courses.count > 0 %}
+		<h2>Cursos asignados </h2>
+	{%elif list_courses.count == 0  %}
+		<h2>Aún no tiene cursos asignados</h2>
+	{% endif %}
+
+	{%for lscourses in list_courses %}
+		<ul class="list-group">
+			<li class="list-group-item"><a href="{% url 'modules' pk=lscourses.pk %}">{{ lscourses.name }} ({{ lscourses.description }})</a></li>
+		</ul>
+	{% endfor %}
+</div>
+{% endblock content %}

@@ -68,6 +68,13 @@
                                 <a href="{% url 'users_new' %}">Crear Usuarios</a>
                             </li>
                             {% endif %}
+                            {% if request.session.user_type == 2 %}
+                            <li>
+                                <a href="{% url 'my_courses' pk=request.session.id %}">Mis cursos</a>
+                                
+                            </li>
+                            {% endif %}
+
                             
 
                             <li>
@@ -80,6 +87,8 @@
             </div>
         </div>
     </div>
+
+    
 </header>
 
 <!-- END HEADER SECTION -->

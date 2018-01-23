@@ -2,22 +2,23 @@ from __future__ import unicode_literals
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from apps.courses.models import Course, CourseModule, Resource
-
+from apps.users.models import UserCourse
 from .forms import CourseForm, CourseModuleForm, ResourceForm
 
 # Create your views here
-
 def home(request):
 	index_template = "app/index.html"
 	list_courses = Course.objects.all().order_by('-created_at')
+	user_data = UserCourse.objects.get(pk=4)
 
-	name="Elizabeth"
-	request.session['user_cur'] = name
-	request.session['session_estatus'] = True;
-	request.session['user_type'] = 1;
+	request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
+	request.session['session_estatus'] = user_data.is_active;
+	request.session['user_type'] = user_data.user_type;
+	request.session['id'] = user_data.id;
 	
 	return render(request, index_template, {
 		'list_courses': list_courses,
+		'user_data': user_data,
 		'title_page': 'Nuts'
 	})
 
@@ -40,6 +41,17 @@ def add_courses(request):
 	else:
 		return redirect('home')
 
+
+def my_courses(request, pk):
+	index_template = "app/courses_for_teacher.html"
+	list_courses = Course.objects.filter(usercourse=pk).order_by('-created_at')
+	user_data = UserCourse.objects.get(pk=pk)
+	
+	return render(request, index_template, {
+		'list_courses': list_courses,
+		'user_data': user_data,
+		'title_page': 'Nuts'
+	})
 
 def modules(request, pk):
 	try:
