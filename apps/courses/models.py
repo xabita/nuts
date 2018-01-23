@@ -64,3 +64,17 @@ class Resource(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+class CourseStudent(models.Model):
+	user_student = models.ForeignKey('users.UserCourse', on_delete=models.CASCADE, blank=True, null=True)
+	course = models.ForeignKey('Course', on_delete=models.CASCADE, blank=True, null=True)
+	is_active = models.BooleanField(default=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return '%s %s' % (self.first_name, self.last_name)
+
+
+	def __unicode__(self):
+		return self.first_name
