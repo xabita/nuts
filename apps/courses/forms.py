@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Course, CourseModule, Resource
+from .models import Course, CourseModule, Resource, CourseStudent
 # Admin Pagedown Widget
 from pagedown.widgets import AdminPagedownWidget
 
@@ -39,4 +39,9 @@ class ResourceForm(forms.ModelForm):
 		model = Resource
 		fields = ('title','url_video', 'content', 'category', )
 
-	
+class CourseStudentForm(forms.ModelForm):
+	class Meta:
+		model = CourseStudent
+		fields = ('is_active',)
+
+

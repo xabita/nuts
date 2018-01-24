@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="page-section section pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+              <h1 style="margin-top:2em;">Inscribirse</h1>
+          
+                <div class="login-reg-form"> 
+                    <form class="post-form" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="row">
+                            {{ form.as_p }}                 
+                            <div class="col-xs-12">
+                                <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

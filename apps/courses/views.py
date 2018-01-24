@@ -3,13 +3,13 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from apps.courses.models import Course, CourseModule, Resource
 from apps.users.models import UserCourse
-from .forms import CourseForm, CourseModuleForm, ResourceForm
+from .forms import CourseForm, CourseModuleForm, ResourceForm, CourseStudentForm
 
 # Create your views here
 def home(request):
 	index_template = "app/index.html"
 	list_courses = Course.objects.all().order_by('-created_at')
-	user_data = UserCourse.objects.get(pk=4)
+	user_data = UserCourse.objects.get(pk=1)
 
 	request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
 	request.session['session_estatus'] = user_data.is_active;
@@ -60,6 +60,7 @@ def modules(request, pk):
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
 		no_modules= len(modules)
 		IdCourse=course.id
+	
 	except Course.DoesNotExist:
 		raise Http404("Course does not exist")
 
@@ -153,3 +154,24 @@ def resource_detail(request, pk):
 		'resources': resources,
 		'Urlvideo': Urlvideo,
 	})
+
+def student_new(request):
+	index_template = "app/student_new.html"
+	courseStudent_form = CourseStudentForm()
+	
+	return render(request, index_template, {
+		'title_page': 'Nuts.',
+		'form': courseStudent_form,
+	})
+
+def student_add(request):
+	if request.method == "POST":
+		form = CourseStudentForm(request.POST)
+		if form.is_valid():
+			CourseStudent = form.save(commit=False)
+			CourseStudent.save()
+			return modules(request, CourseStudent.course)
+	else:
+		return redirect('home')
+
+

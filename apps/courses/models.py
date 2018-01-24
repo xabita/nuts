@@ -66,8 +66,8 @@ class Resource(models.Model):
 		return self.title
 
 class CourseStudent(models.Model):
-	user_student = models.ForeignKey('users.UserCourse', on_delete=models.CASCADE, blank=True, null=True)
-	course = models.ForeignKey('Course', on_delete=models.CASCADE, blank=True, null=True)
+	user_student = models.ForeignKey('users.UserCourse', on_delete=models.CASCADE, blank=True, null=False)
+	course = models.ForeignKey('Course', on_delete=models.CASCADE, blank=True, null=False)
 	is_active = models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)

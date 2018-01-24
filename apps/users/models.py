@@ -8,11 +8,13 @@ USER_CHOICES = (
 )
    
 class UserCourse(models.Model):
-	first_name = models.CharField(max_length=60 ,blank=True, null=True)
-	last_name = models.CharField(max_length=60 ,blank=True, null=True)
+	first_name = models.CharField(max_length=60 ,blank=True, null=False)
+	last_name = models.CharField(max_length=60 ,blank=True, null=False)
 	email = models.EmailField(default='mail@co.co', blank=False)
 	user_type= models.IntegerField(default = 3, choices=USER_CHOICES)
 	is_active = models.BooleanField(default=True)
+	username = models.CharField(max_length=15 ,blank=True, null=False, unique=True)
+	password = models.CharField(max_length=30,blank=True, null=False,)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 

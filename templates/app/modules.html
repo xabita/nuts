@@ -18,6 +18,11 @@
                 {% endfor %}
               </h2> 
                 <div class="login-reg-form">
+
+                  holaaa
+
+                    
+
                   {% if no_modules > 0 %}
                   <h3 style="margin-top:2em;">Modulos</h3>
               
@@ -26,6 +31,26 @@
                           <li class="list-group-item"><a href="{% url 'resources' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
                         </ul>
                     {% endfor %}
+
+                    {% if request.session.user_type == 3 %}
+                    <form class="post-form" method="POST" action="{% url 'student_add'  %}">
+                      
+
+                  
+                        <input type="text" name="course" value="{{ IdCourse }}">
+                        <input type="text" name="user_student" value="{{ request.session.id }}">
+
+
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
+
+                  
                   {% else %}
                     <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
@@ -42,6 +67,7 @@
                       </div>
                   </form>
                   {% endif %}
+                  
                 </div>
             </div>
         </div>

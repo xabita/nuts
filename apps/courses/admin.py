@@ -8,7 +8,7 @@ from pagedown.widgets import AdminPagedownWidget
 from .forms import CourseForm, CourseModuleForm, ResourceForm
 
 # Register your models here.
-from apps.courses.models import Course, CourseModule, Resource
+from apps.courses.models import Course, CourseModule, Resource, CourseStudent
 
 class CourseAdmin(admin.ModelAdmin):
 	list_display = ('name', 'description', 'updated_at', )
@@ -29,8 +29,14 @@ class ResourceAdmin(admin.ModelAdmin):
     #    models.TextField: {'widget': AdminPagedownWidget },
     #}
 
+class CourseStudentAdmin(admin.ModelAdmin):
+	list_display = ('user_student', 'course', 'is_active', 'updated_at', )
+	list_filter = ('created_at',)
+
+
 
 # Register your models here.
 admin.site.register(Course, CourseAdmin)
 admin.site.register(CourseModule, CourseModuleAdmin)
+admin.site.register(CourseStudent, CourseStudentAdmin)
 #admin.site.register(Resource, ResourceAdmin)
