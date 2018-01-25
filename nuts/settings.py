@@ -133,6 +133,8 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = 'home'
 
+AUTH_USER_MODEL = 'users.UserCourse'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
