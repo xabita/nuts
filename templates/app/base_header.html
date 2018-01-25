@@ -48,6 +48,8 @@
                 <div class="header-logo float-left">
                     <a href="#"></a>
                 </div>
+ssss:  
+                {{request.session.session_estatus}}
                 <!-- header-search & total-cart -->
                 <div class="float-right">
                     
@@ -75,19 +77,26 @@
                             </li>
                             {% endif %}
 
+                            {% if request.session.session_estatus == False %}
+                            <li>
+                                <a href="{% url 'users_new' %}">Registrarme</a>
+                            </li>
+                            {% endif %}
+
+
                             <li>
                                 <a href="{% url 'student_new' %}">Inscribirme</a>
                             </li>
 
 
                             <li>
-                                <a href="{% url 'login' %}">Login</a>
+                                <a href="{% url 'logoutUs' %}">Login</a>
                             </li> 
 
                             
 
                             <li>
-                                <a href="{% url 'logout' %}">Cerrar Sesion</a>
+                                <a href="{% url 'logoutUs' %}">Cerrar Sesion</a>
                             </li> 
                         </ul>
                     </nav>

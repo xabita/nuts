@@ -1,6 +1,5 @@
 from django.conf.urls import include, url
 from apps.users import views as user_views
-from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -9,8 +8,8 @@ urlpatterns = [
    # url(r'^login/$', auth_views.login, name='login'),
    # url(r'^logout/$', auth_views.logout, name='logout'),
    
-    url(r'^login/$', auth_views.login, {'template_name': 'app/login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout, {'template_name': 'app/logged_out.html'}, name='logout'),
+    #url(r'^login/$', user_views.login, {'template_name': 'app/login.html'}, name='login'),
+    url(r'^logoutUs/$', user_views.logoutUs, name='logoutUs'),
 
 
 

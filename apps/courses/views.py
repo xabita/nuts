@@ -11,10 +11,19 @@ def home(request):
 	list_courses = Course.objects.all().order_by('-created_at')
 	user_data = UserCourse.objects.get(pk=1)
 
-	request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
-	request.session['session_estatus'] = user_data.is_active;
-	request.session['user_type'] = user_data.user_type;
-	request.session['id'] = user_data.id;
+
+
+	if "session_estatus" in request.session:
+		request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
+		request.session['session_estatus'] = user_data.is_active
+		request.session['user_type'] = user_data.user_type
+		request.session['id'] = user_data.id
+		
+	else:
+		request.session['user_cur'] = ''
+		request.session['session_estatus'] = False
+		request.session['user_type'] = 0
+		request.session['id'] = 0
 	
 	return render(request, index_template, {
 		'list_courses': list_courses,
@@ -60,6 +69,8 @@ def modules(request, pk):
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
 		no_modules= len(modules)
 		IdCourse=course.id
+		courseStudent_form = CourseStudentForm()
+
 	
 	except Course.DoesNotExist:
 		raise Http404("Course does not exist")
@@ -70,12 +81,15 @@ def modules(request, pk):
 		'title_page': Course.name,
 		'no_modules': no_modules,
 		'IdCourse': IdCourse,
+		'formStudent': courseStudent_form,
+		
 	})
 
 
 def modules_new(request,pk):
 	index_template = "app/modules_new.html"
 	coursesmodule_form = CourseModuleForm()
+		
 	
 	return render(request, index_template,{
 		'title_page': 'Nuts',
@@ -161,17 +175,21 @@ def student_new(request):
 	
 	return render(request, index_template, {
 		'title_page': 'Nuts.',
-		'form': courseStudent_form,
+		'formS': courseStudent_form,
 	})
 
-def student_add(request):
+def student_add(request, studentId, courseId):
 	if request.method == "POST":
 		form = CourseStudentForm(request.POST)
+		student = CourseStudent.objects.get(pk=studentId)
+		course = Course.objects.get(pk=courseId)
+
 		if form.is_valid():
 			CourseStudent = form.save(commit=False)
+			CourseStudent.save()
+			CourseStudent.user_student= student
+			CourseStudent.course= course
 			CourseStudent.save()
 			return modules(request, CourseStudent.course)
 	else:
 		return redirect('home')
-
-

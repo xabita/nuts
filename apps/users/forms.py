@@ -8,4 +8,4 @@ class UserCourseForm(forms.ModelForm):
 
 	class Meta:
 		model = UserCourse
-		fields = ('first_name','last_name', 'email', 'user_type', 'is_active')
+		fields = ('first_name','last_name', 'email', 'user_type', 'is_active', 'username','password')
