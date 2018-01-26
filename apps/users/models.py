@@ -1,10 +1,13 @@
 from django.db import models
+
+from django.conf import settings
 #from django.nuts.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 
 from .managers import UserManager
+
 
 
 
@@ -22,12 +25,14 @@ class UserCourse(AbstractBaseUser, PermissionsMixin):
 	user_type= models.IntegerField(default = 3, choices=USER_CHOICES)
 	is_active = models.BooleanField(default=True)
 	username = models.CharField(max_length=15 ,blank=True, null=False, unique=True)
-	password = models.CharField(max_length=30,blank=True, null=False,)
+	password = models.CharField(max_length=150,blank=True, null=False)
+	last_login = models.DateTimeField(auto_now=True)
+	is_staff = models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
 	objects = UserManager()
-	USERNAME_FIELD = 'email'
+	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = []
 
 	class Meta:

@@ -135,6 +135,10 @@ LOGIN_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'users.UserCourse'
 
+AUTHENTICATION_BACKENDS = ('apps.users.backend.UserAuthentificacionBackend',)
+
+
+
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (

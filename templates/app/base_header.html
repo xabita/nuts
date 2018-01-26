@@ -48,6 +48,15 @@
                 <div class="header-logo float-left">
                     <a href="#"></a>
                 </div>
+
+{% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+{% else %}
+  <p>Welcome, new user. Please log in.</p>
+{% endif %}
+
+
+                
 ssss:  
                 {{request.session.session_estatus}}
                 <!-- header-search & total-cart -->
@@ -90,13 +99,13 @@ ssss:
 
 
                             <li>
-                                <a href="{% url 'logoutUs' %}">Login</a>
+                                <a href="{% url 'login' %}">Login</a>
                             </li> 
 
                             
 
                             <li>
-                                <a href="{% url 'logoutUs' %}">Cerrar Sesion</a>
+                                <a href="{% url 'logout' %}">Cerrar Sesion</a>
                             </li> 
                         </ul>
                     </nav>

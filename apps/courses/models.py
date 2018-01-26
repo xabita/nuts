@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from apps.users.models import UserCourse
+from django.conf import settings
 
 
 # DEPENDENCIES TO MAKE UNIQUE SLUG BY POST
@@ -66,7 +67,7 @@ class Resource(models.Model):
 		return self.title
 
 class CourseStudent(models.Model):
-	user_student = models.ForeignKey('users.UserCourse', on_delete=models.CASCADE)
+	user_student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	course = models.ForeignKey('Course', on_delete=models.CASCADE, blank=True, null=False)
 	is_active = models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
