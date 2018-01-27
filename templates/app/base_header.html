@@ -50,6 +50,8 @@
                 </div>
 
 {% if user.is_authenticated %}
+
+{{user.is_authenticated}}
   <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
 {% else %}
   <p>Welcome, new user. Please log in.</p>
@@ -79,16 +81,19 @@ ssss:
                                 <a href="{% url 'users_new' %}">Crear Usuarios</a>
                             </li>
                             {% endif %}
-                            {% if request.session.user_type == 2 %}
+                            {% if user.user_type == 2 %}
                             <li>
                                 <a href="{% url 'my_courses' pk=request.session.id %}">Mis cursos</a>
                                 
                             </li>
                             {% endif %}
 
-                            {% if request.session.session_estatus == False %}
+                            {% if user.is_authenticated is False %}
                             <li>
                                 <a href="{% url 'users_new' %}">Registrarme</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'login' %}">Login</a>
                             </li>
                             {% endif %}
 
@@ -98,9 +103,7 @@ ssss:
                             </li>
 
 
-                            <li>
-                                <a href="{% url 'login' %}">Login</a>
-                            </li> 
+                             
 
                             
 
