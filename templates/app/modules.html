@@ -33,21 +33,18 @@
                     {% endfor %}
 
 
-                    , courseId
+                    
 
-
-                    {% if request.session.user_type == 3 %}
+                    {% if user.user_type == 3 %}
                     <form class="post-form" method="POST" action="">
                       asdasdas
                         {% csrf_token %}
                         {{ formStudent.as_p }}                 
                            
-                        <input type="text" name="course" value="{{ IdCourse }}">
-                        <input type="text" name="user_student" value="{{ request.session.id }}">
-
+                        
                         <div class="row">
                             <div class="col-xs-12">
-                                <a href="{% url 'student_add' studentId=request.session.id courseId=IdCourse  %}"><button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button></a>
+                                <a href="{% url 'student_add' studentId=user.id courseId=IdCourse %}"><button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button></a>
                             </div>
                         </div>
                     </form>
@@ -60,7 +57,7 @@
 
 
 
-                  {% if request.session.user_type == 2 %}
+                  {% if user.user_type == 2 %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
                       {% csrf_token %}
                       <div class="row">

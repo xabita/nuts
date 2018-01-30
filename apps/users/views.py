@@ -37,31 +37,6 @@ def users_add(request):
 			us_course.set_password(pw)
 			us_course.save()
 
-			#if "session_estatus" not in request.session:
-				
-			#	request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
-			#	request.session['session_estatus'] = user_data.is_active
-			#	request.session['user_type'] = user_data.user_type
-			#	request.session['id'] = user_data.id
-
 		return home_users(request)
 	else:
 		return redirect('home')
-
-
-def logoutUs(request):
-
-
-	index_template = "app/index.html"
-	
-	if "session_estatus" in request.session:
-		request.session['user_cur'] = ''
-		request.session['session_estatus'] = False
-		request.session['user_type'] = 0
-		request.session['id'] = 0
-
-	
-	return render(request, index_template, {
-		'title_page': 'Nuts.',
-	})
-

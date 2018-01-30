@@ -10,21 +10,6 @@ def home(request):
 	index_template = "app/index.html"
 	list_courses = Course.objects.all().order_by('-created_at')
 	user_data = UserCourse.objects.get(pk=1)
-
-
-	'''
-	if "session_estatus" in request.session:
-		request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
-		request.session['session_estatus'] = user_data.is_active
-		request.session['user_type'] = user_data.user_type
-		request.session['id'] = user_data.id
-		
-	else:
-		request.session['user_cur'] = ''
-		request.session['session_estatus'] = False
-		request.session['user_type'] = 0
-		request.session['id'] = 0
-		'''
 	
 	return render(request, index_template, {
 		'list_courses': list_courses,
