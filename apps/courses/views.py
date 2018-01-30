@@ -165,6 +165,7 @@ def student_new(request):
 	})
 
 def student_add(request, studentId, courseId):
+	print(studentId)
 	if request.method == "POST":
 		form = CourseStudentForm(request.POST)
 		student = CourseStudent.objects.get(pk=studentId)
@@ -176,6 +177,8 @@ def student_add(request, studentId, courseId):
 			CourseStudent.user_student= student
 			CourseStudent.course= course
 			CourseStudent.save()
-			return modules(request, CourseStudent.course)
+
+			
+			#return modules(request, CourseStudent.course)
 	else:
 		return redirect('home')

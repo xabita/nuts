@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container">
-  <h2 style="margin-top:4em;">Usuarios registrados</h2>
+  <h2 style="margin-top:5em;">Usuarios registrados</h2>
   {%for lsusers in list_users %}
   <ul class="list-group">
     <li class="list-group-item"><a href="{% url 'my_courses' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a></li>
