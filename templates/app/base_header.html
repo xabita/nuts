@@ -69,7 +69,7 @@ ssss:
                             <li>
                                 <a href="{% url 'home' %}">Inicio</a>
                             </li>
-                            {% if request.session.user_type == 1 %}
+                            {% if user.user_type == 1 %}
                             <li>
                                 <a href="{% url 'new_course' %}">Crear curso</a>
                                 
@@ -83,8 +83,13 @@ ssss:
                             {% endif %}
                             {% if user.user_type == 2 %}
                             <li>
-                                <a href="{% url 'my_courses' pk=request.session.id %}">Mis cursos</a>
+                                <a href="{% url 'my_courses' pk=user.id %}">Mis cursos</a>
                                 
+                            </li>
+                            {% endif %}
+                            {% if user.user_type == 3 %}
+                            <li>
+                                <a href="{% url 'student_new' %}">Inscribirme</a>
                             </li>
                             {% endif %}
 
@@ -95,17 +100,8 @@ ssss:
                             <li>
                                 <a href="{% url 'login' %}">Login</a>
                             </li>
-                            {% endif %}
-
-
-                            <li>
-                                <a href="{% url 'student_new' %}">Inscribirme</a>
-                            </li>
-
-
-                             
-
                             
+                            {% endif %}
 
                             <li>
                                 <a href="{% url 'logout' %}">Cerrar Sesion</a>

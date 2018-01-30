@@ -33,13 +33,16 @@ def users_add(request):
 		if form.is_valid():
 			us_course = form.save(commit=False)
 			us_course.save()
-		
-			if "session_estatus" not in request.session:
+			pw = us_course.password
+			us_course.set_password(pw)
+			us_course.save()
+
+			#if "session_estatus" not in request.session:
 				
-				request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
-				request.session['session_estatus'] = user_data.is_active
-				request.session['user_type'] = user_data.user_type
-				request.session['id'] = user_data.id
+			#	request.session['user_cur'] = user_data.first_name + ' ' + user_data.last_name
+			#	request.session['session_estatus'] = user_data.is_active
+			#	request.session['user_type'] = user_data.user_type
+			#	request.session['id'] = user_data.id
 
 		return home_users(request)
 	else:
