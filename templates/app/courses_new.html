@@ -14,7 +14,13 @@
                     <form class="post-form" method="POST" action="{% url 'add_courses' %}">
                         {% csrf_token %}
                         <div class="row">
-                        	{{ form.as_p }}                 
+                        	{{ form.as_p }} 
+                            <select>
+                                <option value="">---------</option>
+                                {% for usercourse in c_users %}
+                                <option value="{{ city.pk }}">{{ usercourse.first_name }}</option>
+                                {% endfor %}
+                            </select>                                            
                             <div class="col-xs-12">
                                 <button type="submit" id="btn_sub" class="save btn btn-default">Crear</button>
                             </div>

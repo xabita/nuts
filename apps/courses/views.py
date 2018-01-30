@@ -20,10 +20,13 @@ def home(request):
 def new_course(request):
 	index_template = "app/courses_new.html"
 	courses_form = CourseForm()
+	c_users = UserCourse.objects.filter(user_type=2).order_by('first_name')
+    
 	
 	return render(request, index_template, {
 		'title_page': 'Nuts.',
 		'form': courses_form,
+		'c_users': c_users,
 	})
 
 def add_courses(request):
@@ -178,7 +181,7 @@ def student_add(request, studentId, courseId):
 			CourseStudent.course= course
 			CourseStudent.save()
 
-			
-			#return modules(request, CourseStudent.course)
+
+			return modules(request, CourseStudent.course)
 	else:
 		return redirect('home')

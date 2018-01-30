@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Course, CourseModule, Resource, CourseStudent
+from .models import Course, CourseModule, Resource, CourseStudent, UserCourse
 # Admin Pagedown Widget
 from pagedown.widgets import AdminPagedownWidget
 
@@ -15,6 +15,11 @@ class CourseForm(forms.ModelForm):
 	class Meta:
 		model = Course
 		fields = ('name','description', 'usercourse',)
+
+		def __init__(self, *args, **kwargs):
+			super().__init__(*args, **kwargs)
+			self.fields['usercourse'].queryset = UserCourse.objects.none()
+
 
 class CourseModuleForm(forms.ModelForm):
 	description = 	forms.CharField(
