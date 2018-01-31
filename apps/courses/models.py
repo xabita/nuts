@@ -5,6 +5,7 @@ from apps.users.models import UserCourse
 from django.conf import settings
 
 
+
 # DEPENDENCIES TO MAKE UNIQUE SLUG BY POST
 #from autoslug import AutoSlugField
 #from django.template.defaultfilters import slugify
