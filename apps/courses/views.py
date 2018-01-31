@@ -5,6 +5,12 @@ from apps.courses.models import Course, CourseModule, Resource
 from apps.users.models import UserCourse
 from .forms import CourseForm, CourseModuleForm, ResourceForm, CourseStudentForm
 
+
+from faqs.forms import ResourceCommentForm
+from faqs.models import ResourceComment
+
+
+
 # Create your views here
 def home(request):
 	index_template = "app/index.html"
@@ -149,6 +155,10 @@ def resource_detail(request, pk):
 		#list_module = CourseModule.objects.filter(pk=pk).order_by('-created_at')
 		resources = Resource.objects.filter(pk = pk).order_by('-created_at')[:10]
 		Urlvideo=res
+		comments = ResourceComment.objects.filter(resource = res).order_by('-created_at')[:10]
+		comment_form = ResourceCommentForm()
+	
+
 		
 	except CourseModule.DoesNotExist:
 		raise Http404("Course does not exist")
@@ -156,6 +166,9 @@ def resource_detail(request, pk):
 	return render(request, 'app/resources_detail.html', {
 		'resources': resources,
 		'Urlvideo': Urlvideo,
+		'form': comment_form,
+		'comments': comments,
+		
 	})
 
 def student_new(request):

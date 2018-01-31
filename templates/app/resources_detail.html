@@ -28,4 +28,55 @@
         </div>
     </div>
 </div>
+
+
+
+    <!-- COMMENTS SECTION START --> 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="section-title col-xs-12 mb-20">
+                <h3>Comentarios</h3>
+            </div>
+        </div>
+        
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                {% for c in comments %}
+                <!-- Comment Item -->
+                <div class="blog-item mb-75">
+                    <!-- Content -->
+                    <div class="content fix">
+                        <div class="comentarios">
+                           
+                            <div class="comment_usuario" style="float:left; padding:20px;">Elizabeth</div>
+                            <div class="comment_fecha"  style="float:left; padding:20px;">
+                                <span >{{ c.created_at | date:"d" }}</span>
+                                <span >/ {{ c.created_at | date:"M" }}</span>
+                            </div>
+                            <div class="comment_comment" style="padding-top:70px; padding-left:50px;">{{ c.comment }}</div>
+                        </div>
+                          
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <form class="post-form" method="POST" action="{% url 'add_comments_blog' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="hidden" name="post" value="{{ posts.id }}" id="post">
+                        <button type="submit" class="save btn btn-default">Publicar</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- COMMENTS SECTION END --> 
+
+
+
 {% endblock content %}
