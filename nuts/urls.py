@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(courses_urls)),
     url(r'^', include(users_urls)),
-    url(r'^', include(faqs_curls)),
+    url(r'^', include(faqs_urls)),
 
 
 ] 

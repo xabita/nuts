@@ -1,13 +1,13 @@
 from django.shortcuts import redirect, render
 from apps.faqs.models import ResourceComment
-from courses.models import Resource
+from apps.courses.models import Resource
 
-from .forms import ResourceommentForm
+from apps.faqs.forms import ResourceCommentForm
 
 # Create your views here.
 def add_comments(request):
 	if request.method == "POST":
-		form = ResourceommentForm(request.POST)
+		form = ResourceCommentForm(request.POST)
 		if form.is_valid():
 			comment = form.save(commit=False)
 			resource_tmp = Resource.objects.get(pk=request.POST.get("resource",))
