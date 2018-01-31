@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'markdown_deux',
     'apps.courses',
     'apps.users',
-    'faqs',
+    'apps.faqs',
 
 ]
 

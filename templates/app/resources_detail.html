@@ -64,7 +64,7 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <form class="post-form" method="POST" action="{% url 'add_comments_blog' %}">
+                    <form class="post-form" method="POST" action="{% url 'add_comments_resource' %}">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <input type="hidden" name="post" value="{{ posts.id }}" id="post">

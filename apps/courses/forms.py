@@ -1,6 +1,8 @@
 
 from django import forms
 from .models import Course, CourseModule, Resource, CourseStudent, UserCourse
+# Admin Pagedown Widget
+from pagedown.widgets import AdminPagedownWidget
 
 # -----------------------------------------------------------------------------
 # CONTENT FORMS

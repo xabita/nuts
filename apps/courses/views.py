@@ -6,8 +6,8 @@ from apps.users.models import UserCourse
 from .forms import CourseForm, CourseModuleForm, ResourceForm, CourseStudentForm
 
 
-from faqs.forms import ResourceCommentForm
-from faqs.models import ResourceComment
+from apps.faqs.forms import ResourceCommentForm
+from apps.faqs.models import ResourceComment
 
 
 
