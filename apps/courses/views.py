@@ -41,6 +41,10 @@ def add_courses(request):
 		if form.is_valid():
 			course = form.save(commit=False)
 			course.save()
+			resource_us= request.POST.get('usercourse')
+			resource_user = UserCourse.objects.get(pk=resource_us)
+			course.usercourse = resource_user
+			course.save()
 			return modules(request, course.id)
 	else:
 		return redirect('home')
