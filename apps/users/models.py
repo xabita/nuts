@@ -5,6 +5,9 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 
+from helpers.helper_images import make_upload_path
+from defaults.strings import *
+
 from .managers import UserManager
 
 
@@ -27,6 +30,8 @@ class UserCourse(AbstractBaseUser, PermissionsMixin):
 	password = models.CharField(max_length=150,blank=True, null=False)
 	last_login = models.DateTimeField(auto_now=True)
 	is_staff = models.BooleanField(default=True)
+	image = models.ImageField(upload_to='make_upload_path',
+									default=DEFAULT_PICTURE_FOR_USER)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 

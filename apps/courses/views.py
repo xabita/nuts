@@ -157,6 +157,7 @@ def resource_detail(request, pk):
 		Urlvideo=res
 		comments = ResourceComment.objects.filter(resource = res).order_by('-created_at')[:10]
 		comment_form = ResourceCommentForm()
+		resourceId= res.id
 	
 
 		
@@ -168,7 +169,7 @@ def resource_detail(request, pk):
 		'Urlvideo': Urlvideo,
 		'form': comment_form,
 		'comments': comments,
-		
+
 	})
 
 def student_new(request):

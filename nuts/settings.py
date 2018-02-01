@@ -138,6 +138,8 @@ AUTH_USER_MODEL = 'users.UserCourse'
 
 AUTHENTICATION_BACKENDS = ('apps.users.backend.UserAuthentificacionBackend',)
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/').replace('\\','/')
+MEDIA_URL = '/media/'
 
 
 STATIC_URL = '/static/'
