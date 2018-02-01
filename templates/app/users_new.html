@@ -11,10 +11,11 @@
             <div class="col-md-8 col-md-offset-2 col-xs-12">
             <h1 style="margin-top:4em;">Nuevo usuario</h1>
                 <div class="login-reg-form"> 
-                    <form class="post-form" method="POST" action="{% url 'users_add' %}">
+                    <form class="post-form" method="POST" action="{% url 'users_add' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
-                        	{{ form.as_p }}                 
+                        	{{ form.as_p }}  
+                            
                             <div class="col-xs-12">
                                 <button type="submit" id="btn_sub" class="save btn btn-default">Guardar</button>
                             </div>

@@ -98,7 +98,8 @@ ssss:
                                 <a href="{% url 'users_new' %}">Registrarme</a>
                             </li>
                             <li>
-                                <a href="{% url 'login' %}">Login</a>
+                                <a href="{% url 'login' %}">Login
+                                    <img src="{{user.image.url}}"></a>
                             </li>
                             
                             {% endif %}

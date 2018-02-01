@@ -29,14 +29,25 @@ def users_new(request):
 
 def users_add(request):
 	if request.method == "POST":
-		form = UserCourseForm(request.POST)
+		form = UserCourseForm(request.POST, request.FILES)
 		if form.is_valid():
 			us_course = form.save(commit=False)
+			#us_course = UserCourse.objects.get(pk=usercourse_id)
+			us_course.image = form.cleaned_data['image']
 			us_course.save()
 			pw = us_course.password
 			us_course.set_password(pw)
 			us_course.save()
 
-		return home_users(request)
+		return users_detail(request, us_course.id)
 	else:
 		return redirect('home')
+
+def users_detail(request, pk):
+	index_template = "app/users_detail.html"
+	users_data = UserCourse.objects.get(pk=pk)
+	
+	return render(request, index_template, {
+		'users_data': users_data,
+		'title_page': 'Nuts'
+	})
