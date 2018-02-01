@@ -35,11 +35,12 @@ def users_add(request):
 			#us_course = UserCourse.objects.get(pk=usercourse_id)
 			us_course.image = form.cleaned_data['image']
 			us_course.save()
+
 			pw = us_course.password
 			us_course.set_password(pw)
 			us_course.save()
 
-		return users_detail(request, us_course.id)
+		return home_users(request)
 	else:
 		return redirect('home')
 

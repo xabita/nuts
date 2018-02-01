@@ -53,11 +53,14 @@
 
 {{user.is_authenticated}}
   <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+  <br>
+  
+
 {% else %}
   <p>Welcome, new user. Please log in.</p>
 {% endif %}
 
-
+                    
                 
 ssss:  
                 {{request.session.session_estatus}}
@@ -98,15 +101,21 @@ ssss:
                                 <a href="{% url 'users_new' %}">Registrarme</a>
                             </li>
                             <li>
-                                <a href="{% url 'login' %}">Login
-                                    <img src="{{user.image.url}}"></a>
+                                <a href="{% url 'login' %}">Login</a>
+                                
                             </li>
                             
-                            {% endif %}
-
+                            {% else %}
                             <li>
+                                <div>
+                                    <img src={{ user.image.url }} style="width:50px; ">
+                                </div>
+                            </li> 
+                            <li>                                
                                 <a href="{% url 'logout' %}">Cerrar Sesion</a>
                             </li> 
+                            {% endif %}
+                            
                         </ul>
                     </nav>
                 </div>

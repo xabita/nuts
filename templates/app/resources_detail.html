@@ -49,8 +49,7 @@
                     <!-- Content -->
                     <div class="content fix">
                         <div class="comentarios">
-                           
-                            <div class="comment_usuario" style="float:left; padding:20px;">Elizabeth</div>
+                            <div class="comment_usuario" style="float:left; padding:20px;"><img src="{{ c.usercourse.image.url }}" alt="" style="width:50px; "> {{c.usercourse.first_name}} {{c.usercourse.last_name}}</div>
                             <div class="comment_fecha"  style="float:left; padding:20px;">
                                 <span >{{ c.created_at | date:"d" }}</span>
                                 <span >/ {{ c.created_at | date:"M" }}</span>
@@ -64,10 +63,10 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <form class="post-form" method="POST" action="{% url 'add_comments' pk=Urlvideo.id %}">
+                    <form class="post-form" method="POST" action="{% url 'add_comments' pk=Urlvideo.id%}">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <input type="hidden" name="post" value="{{ posts.id }}" id="post">
+                        <input type="text" name="usercourse" value="{{ user.id }}" id="usercourse">
                         <button type="submit" class="save btn btn-default">Publicar</button> 
                     </form>
                 </div>
