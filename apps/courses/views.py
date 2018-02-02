@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from apps.courses.models import Course, CourseModule, Resource
+from apps.courses.models import Course, CourseModule, Resource, CourseStudent
 from apps.users.models import UserCourse
 from .forms import CourseForm, CourseModuleForm, ResourceForm, CourseStudentForm
 
@@ -69,6 +69,10 @@ def modules(request, pk):
 		no_modules= len(modules)
 		IdCourse=course.id
 		courseStudent_form = CourseStudentForm()
+		IdInstructor=course.usercourse.id
+
+		Students = CourseStudent.objects.filter(course = course).order_by('-created_at')[:10]
+		
 
 	
 	except Course.DoesNotExist:
@@ -81,7 +85,8 @@ def modules(request, pk):
 		'no_modules': no_modules,
 		'IdCourse': IdCourse,
 		'formStudent': courseStudent_form,
-		
+		'Students': Students,
+		'IdInstructor': IdInstructor,
 	})
 
 
@@ -116,6 +121,7 @@ def resources(request, pk):
 		resources = Resource.objects.filter(courseModule = module).order_by('-created_at')[:10]
 		no_resources= len(resources)
 		IdModule=module.id
+		IdCourse= module.course.id
 		
 		resource_form = ResourceForm()
 
@@ -128,6 +134,7 @@ def resources(request, pk):
 		'form': resource_form,
 		'no_resources': no_resources,
 		'IdModule': IdModule,
+		'IdCourse': IdCourse,
 	})
 
 def resource_new(request, pk):

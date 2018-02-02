@@ -77,6 +77,6 @@ class CourseStudent(models.Model):
 	def __str__(self):
 		return '%s' % (self.user_student)
 
-
 	def __unicode__(self):
 		return self.user_student
+		

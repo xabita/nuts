@@ -16,6 +16,9 @@
                         <div class="row">
                             {{ form.as_p }}  
                             <div class="col-xs-12">
+                                <a href="{%url 'modules' pk=idCourse %}">
+                                  <button type="button" id="btn_sub" class="save btn btn-default">Cancelar</button>
+                                </a>
                                 <button type="submit" id="btn_sub" class="save btn btn-default">Crear</button>
                             </div>
                         </div>

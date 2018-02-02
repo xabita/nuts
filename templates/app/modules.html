@@ -11,6 +11,8 @@
 <div class="page-section section pt-100 pb-100">
     <div class="container">
         <div class="row">
+
+           
             <div class="col-md-8 col-md-offset-2 col-xs-12">
               <h2 style="margin-top:4em;"> 
                 {% for cur in list_courses %}
@@ -28,6 +30,8 @@
                           <li class="list-group-item"><a href="{% url 'resources' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
                         </ul>
                     {% endfor %}
+
+                 
 
 
                     {% if user.user_type == 3 %}
@@ -52,17 +56,41 @@
                   {% endif %}
 
 
+                  ID-- {{IdInstructor}}<br>
+                   USSS--  {{user.id}}
 
-                  {% if user.user_type == 2 %}
+
+
+
+                  {% if user.user_type == 2 and IdInstructor == user.id %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
                       {% csrf_token %}
                       <div class="row">
                       	  <div class="col-xs-12">
+                            <a href="{%url 'my_courses' pk=user.id %}">
+                                  <button type="button" id="btn_sub" class="save btn btn-default">Cancelar</button>
+                                </a>
+
                               <button type="submit" id="btn_sub" class="save btn btn-default">Agregar Módulo</button>
                           </div>
                       </div>
                   </form>
+                  {%else%}
+                    <a href="{%url 'my_courses' pk=user.id %}">
+                      <button type="button" id="btn_sub" class="save btn btn-default">Regresar</button>
+                    </a>
+
                   {% endif %}
+
+                  <div>
+                    <label>Alumnos registrados</label>
+
+                    {% for lsStudent in Students %}
+                      {{ lsStudent.user_student.first_name }} <img src={{lsStudent.user_student.image.url}} style="width:60px; ">
+                    {% endfor %}
+                  </div>
+
+                  
                   
                 </div>
             </div>

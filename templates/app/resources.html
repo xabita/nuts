@@ -34,6 +34,9 @@
                       {% csrf_token %}
                       <div class="row">
                           <div class="col-xs-12">
+                              <a href="{%url 'modules' pk=IdCourse %}">
+                                 <button type="button" id="btn_sub" class="save btn btn-default">Regresar</button>
+                              </a>
                               <button type="submit" id="btn_sub" class="save btn btn-default">Agregar contenido</button>
                           </div>
                       </div>
