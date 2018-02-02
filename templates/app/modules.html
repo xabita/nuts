@@ -32,15 +32,19 @@
                     {% endfor %}
 
                  
+hhhh{{user.id}}
+
+ {% for lsStudent in Students %}
+                      {{ lsStudent.user_student.id }} 
+                    {% endfor %}
 
 
                     {% if user.user_type == 3 %}
                     <form class="post-form" method="POST" action="{% url 'student_add'%}">
-                      asdasdas
                         {% csrf_token %}
                         {{ formStudent.as_p }} 
-                        <input type="text" name="user_student" value="{{user.id}}">
-                        <input type="text" name="course" value="{{IdCourse}}">
+                        <input type="hidden" name="user_student" value="{{user.id}}">
+                        <input type="hidden" name="course" value="{{IdCourse}}">
 
                         <div class="row">
                             <div class="col-xs-12">
@@ -54,13 +58,6 @@
                   {% else %}
                     <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
-
-
-                  ID-- {{IdInstructor}}<br>
-                   USSS--  {{user.id}}
-
-
-
 
                   {% if user.user_type == 2 and IdInstructor == user.id %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">

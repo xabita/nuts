@@ -49,22 +49,7 @@
                     <a href="#"></a>
                 </div>
 
-{% if user.is_authenticated %}
-
-{{user.is_authenticated}}
-  <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-  <br>
-  
-
-{% else %}
-  <p>Welcome, new user. Please log in.</p>
-{% endif %}
-
-                    
-                
-ssss:  
-                {{request.session.session_estatus}}
-                <!-- header-search & total-cart -->
+   <!-- header-search & total-cart -->
                 <div class="float-right">
                     
                     <nav class="main-menu menu-right float-right">
@@ -101,14 +86,14 @@ ssss:
                                 <a href="{% url 'users_new' %}">Registrarme</a>
                             </li>
                             <li>
-                                <a href="{% url 'login' %}">Login</a>
+                                <a href="{% url 'login' %}">Iniciar sesion</a>
                                 
                             </li>
                             
                             {% else %}
                             <li>
                                 <div>
-                                    <img src={{ user.image.url }} style="width:50px; ">
+                                    <img src={{ user.image.url }} style="width:50px; ">Bienvenido {{ user.username }}.
                                 </div>
                             </li> 
                             <li>                                
