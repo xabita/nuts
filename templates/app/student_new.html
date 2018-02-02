@@ -10,10 +10,16 @@
             <div class="col-md-8 col-md-offset-2 col-xs-12">
               <h1 style="margin-top:2em;">Inscribirse</h1>
                 <div class="login-reg-form"> 
+                    holaaaaaa
                     <form class="post-form" method="POST" action="">
                         {% csrf_token %}
                         <div class="row">
-                            {{ form.as_p }}                 
+                            {{ form.as_p }} 
+
+                            Holaaaaa
+
+                            <input type="text" value="{{user.id}}">
+                            <input type="text" value="{{user.first_name}}">                
                             <div class="col-xs-12">
                                 <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
                             </div>

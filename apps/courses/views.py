@@ -185,21 +185,24 @@ def student_new(request):
 		'formS': courseStudent_form,
 	})
 
-def student_add(request, studentId, courseId):
-	print(studentId)
+
+def student_add(request):
 	if request.method == "POST":
 		form = CourseStudentForm(request.POST)
-		student = CourseStudent.objects.get(pk=studentId)
-		course = Course.objects.get(pk=courseId)
 
 		if form.is_valid():
 			CourseStudent = form.save(commit=False)
-			CourseStudent.save()
-			CourseStudent.user_student= student
-			CourseStudent.course= course
+		
+			resource_us= request.POST.get('user_student')
+			resource_user = UserCourse.objects.get(pk=resource_us)
+			CourseStudent.user_student = resource_user
+
+			resource_cour= request.POST.get('course')
+			resource_course = Course.objects.get(pk=resource_cour)
+			CourseStudent.course = resource_course
 			CourseStudent.save()
 
 
-			return modules(request, CourseStudent.course)
+			return modules(request, CourseStudent.course.id)
 	else:
 		return redirect('home')

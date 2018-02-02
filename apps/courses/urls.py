@@ -19,6 +19,6 @@ urlpatterns = [
     url(r'^resource/detail/(?P<pk>[0-9]+)/$', courses_views.resource_detail, name='resource_detail'),
 
     url(r'^student/new/$', courses_views.student_new, name='student_new'),
-    url(r'^student/add/(?P<studentId>\w+)/(?P<courseId>\w+)/$', courses_views.student_add, name='student_add'),
+    url(r'^student/add/$', courses_views.student_add, name='student_add'),
             
    ]

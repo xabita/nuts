@@ -19,10 +19,7 @@
               </h2> 
                 <div class="login-reg-form">
 
-                  holaaa {{user.id}}
-
-                    
-
+                
                   {% if no_modules > 0 %}
                   <h3 style="margin-top:2em;">Modulos</h3>
               
@@ -34,14 +31,16 @@
 
 
                     {% if user.user_type == 3 %}
-                    <form class="post-form" method="POST" action="">
+                    <form class="post-form" method="POST" action="{% url 'student_add'%}">
                       asdasdas
                         {% csrf_token %}
-                        {{ formStudent.as_p }}                 
-                         
+                        {{ formStudent.as_p }} 
+                        <input type="text" name="user_student" value="{{user.id}}">
+                        <input type="text" name="course" value="{{IdCourse}}">
+
                         <div class="row">
                             <div class="col-xs-12">
-                                <a href="{% url 'student_add' studentId=user.id courseId=IdCourse %}"><button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button></a>
+                              <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
                             </div>
                         </div>
                     </form>
