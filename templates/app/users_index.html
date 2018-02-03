@@ -8,7 +8,16 @@
   <h2 style="margin-top:5em;">Usuarios registrados</h2>
   {%for lsusers in list_users %}
   <ul class="list-group">
-    <li class="list-group-item"><a href="{% url 'my_courses' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a></li>
+    <li class="list-group-item">
+    	{% if lsusers.user_type == 1 %}
+    		Admin<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+	    {% elif lsusers.user_type == 2 %}
+		    Maestro<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+    	{% elif lsusers.user_type == 3 %}
+		   Alumno <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+    	{% endif %}
+
+    </li>
   </ul>
   {% endfor %}
 </div>

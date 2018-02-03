@@ -9,10 +9,30 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-xs-12">
-            <h1 style="margin-top:4em;">Nuevo usuario</h1>
                 <div class="login-reg-form"> 
-                    <form class="post-form" method="POST" action="{% url 'users_add' %}" enctype="multipart/form-data">
-                    </form>
+                    {% if users_data%}
+                    <h1 style="margin-top:4em;">{{users_data.first_name}} {{users_data.last_name}} </h1>
+            
+                    <div></div>
+                    <div> </div>
+                    <div>
+                        <img src={{ users_data.image.url }} style="width:350px; ">
+                    </div>
+
+                    <div>{{users_data.user_type}}</div>
+
+                        {% if users_data.user_type == 2 %}
+                          
+
+                        {% elif users_data.user_type == 3 %}
+                            <h2>Mis cursos</h2>
+                            {%for courseUser in MyCourses%}
+                                <div><h4>{{courseUser.course.name}}</h4></div>
+                            {%endfor%}
+                        {%endif%}
+
+                    {% endif%}
+
                 </div>
             </div>
         </div>

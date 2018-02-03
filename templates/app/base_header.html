@@ -93,7 +93,9 @@
                             {% else %}
                             <li>
                                 <div>
+                                    <a href="{% url 'users_detail' pk=user.id %}">
                                     <img src={{ user.image.url }} style="width:50px; ">Bienvenido {{ user.username }}.
+                                    </a>
                                 </div>
                             </li> 
                             <li>                                

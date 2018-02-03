@@ -3,14 +3,14 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from apps.users.models import UserCourse
-
+from apps.courses.models import Course, CourseStudent
 from .forms import UserCourseForm
 
 # Create your views here
 
 def home_users(request):
 	index_template = "app/users_index.html"
-	list_users = UserCourse.objects.all().order_by('-created_at')
+	list_users = UserCourse.objects.filter().order_by('-user_type')
 	
 	return render(request, index_template, {
 		'list_users': list_users,
@@ -47,8 +47,13 @@ def users_add(request):
 def users_detail(request, pk):
 	index_template = "app/users_detail.html"
 	users_data = UserCourse.objects.get(pk=pk)
+	if users_data.user_type==2:
+		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')
+	elif users_data.user_type==3:
+		MyCourses = CourseStudent.objects.filter(user_student=pk).order_by('-created_at')
 	
 	return render(request, index_template, {
 		'users_data': users_data,
+		'MyCourses': MyCourses,
 		'title_page': 'Nuts'
 	})
