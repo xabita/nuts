@@ -51,6 +51,10 @@ def users_detail(request, pk):
 		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')
 	elif users_data.user_type==3:
 		MyCourses = CourseStudent.objects.filter(user_student=pk).order_by('-created_at')
+	else:
+		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')
+
+
 	
 	return render(request, index_template, {
 		'users_data': users_data,

@@ -19,15 +19,25 @@
                         <img src={{ users_data.image.url }} style="width:350px; ">
                     </div>
 
-                    <div>{{users_data.user_type}}</div>
+                    <div>Tipo User- {{users_data.user_type}}</div>
+
+                    <div>Tipo ID - {{users_data.user_type}}</div>
 
                         {% if users_data.user_type == 2 %}
+                         <h2>Cursos impartidos</h2>
+                            {%for courseUser in MyCourses%}
+                                <a href="{% url 'modules' pk=courseUser.course.id %}">
+                                    <div><h4>{{courseUser.course.name}}</h4></div>
+                                </a>
+                            {%endfor%}
                           
 
                         {% elif users_data.user_type == 3 %}
                             <h2>Mis cursos</h2>
                             {%for courseUser in MyCourses%}
-                                <div><h4>{{courseUser.course.name}}</h4></div>
+                                <a href="{% url 'modules' pk=courseUser.course.id %}">
+                                    <div><h4>{{courseUser.course.name}}</h4></div>
+                                </a>
                             {%endfor%}
                         {%endif%}
 

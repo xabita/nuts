@@ -10,11 +10,11 @@
   <ul class="list-group">
     <li class="list-group-item">
     	{% if lsusers.user_type == 1 %}
-    		Admin<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+    		Admin<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
 	    {% elif lsusers.user_type == 2 %}
-		    Maestro<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+		    Maestro<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
     	{% elif lsusers.user_type == 3 %}
-		   Alumno <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }}</a>
+		   Alumno <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
     	{% endif %}
 
     </li>
