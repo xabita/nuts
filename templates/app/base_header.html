@@ -63,11 +63,12 @@
                                 
                             </li>
                             <li>
-                                <a href="{% url 'home_users' %}">Usuarios</a>
-                            </li>
-                            <li>
                                 <a href="{% url 'users_new' %}">Crear Usuarios</a>
                             </li>
+                            <li>
+                                <a href="{% url 'home_users' pk=user.id %}">Usuarios</a>
+                            </li>
+                           
                             {% endif %}
 
 
@@ -78,27 +79,17 @@
 {{user.id}}
                            
                             {% if user.user_type == 2 or user.user_type == 3 %}
-                            <li>
-                                <a href="{% url 'users_detail' pk=user.id %}">Mis cursos 111</a>
-                                
-                            </li>
+                                <li>
+                                    <a href="{% url 'users_detail' pk=user.id %}">Mis cursos</a>
+                                    
+                                </li>
                             {% endif %}
 
-                            
-
-
-
-
-                            {% if user.user_type == 2 %}
-                            <li>
-                                <a href="{% url 'my_courses' pk=user.id %}">Mis cursos</a>
-                                
-                            </li>
-                            {% endif %}
                             {% if user.user_type == 3 %}
-                            <li>
-                                <a href="{% url 'student_new' %}">Inscribirme</a>
-                            </li>
+                                <li>
+                                    <a href="{% url 'home_users' pk=user.id %}">Comunidad</a>
+                                </li>
+
                             {% endif %}
 
                             {% if user.is_authenticated is False %}

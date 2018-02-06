@@ -7,16 +7,18 @@ from apps.courses.models import Course, CourseStudent
 from .forms import UserCourseForm
 
 # Create your views here
-
-def home_users(request):
+def home_users(request, pk):
 	index_template = "app/users_index.html"
-	list_users = UserCourse.objects.filter().order_by('-user_type')
-	
+	users_data = UserCourse.objects.get(pk=pk)
+	if users_data.user_type==1:
+		list_users = UserCourse.objects.all().order_by('-user_type')
+	elif users_data.user_type==3:
+		list_users = UserCourse.objects.filter(user_type=3).order_by('-user_type')
+
 	return render(request, index_template, {
 		'list_users': list_users,
 		'title_page': 'Nuts'
 	})
-
 
 def users_new(request):
 	index_template = "app/users_new.html"
