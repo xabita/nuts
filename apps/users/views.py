@@ -46,6 +46,7 @@ def users_add(request):
 
 def users_detail(request, pk):
 	index_template = "app/users_detail.html"
+	
 	users_data = UserCourse.objects.get(pk=pk)
 	if users_data.user_type==2:
 		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')

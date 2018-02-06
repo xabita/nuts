@@ -26,8 +26,8 @@
                         {% if users_data.user_type == 2 %}
                          <h2>Cursos impartidos</h2>
                             {%for courseUser in MyCourses%}
-                                <a href="{% url 'modules' pk=courseUser.course.id %}">
-                                    <div><h4>{{courseUser.course.name}}</h4></div>
+                                <a href="{% url 'modules' pk=courseUser.id %}">
+                                    <div><h4>{{courseUser.name}}  ({{ courseUser.description }})</h4></div>
                                 </a>
                             {%endfor%}
                           
