@@ -61,20 +61,24 @@ def my_courses(request, pk):
 		'title_page': 'Nuts'
 	})
 
-def modules(request, pk):
+def modules(request, pk, IdUser):
 	try:
 		course = get_object_or_404(Course, pk=pk)
 		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
 		no_modules= len(modules)
 		IdCourse=course.id
-		courseStudent_form = CourseStudentForm()
 		IdInstructor=course.usercourse.id
+		courseStudent_form = CourseStudentForm()
 
-		Students = CourseStudent.objects.filter(course = course).order_by('-created_at')[:10]
-		
+		users_data = UserCourse.objects.get(pk=IdUser)
+		if users_data.user_type==2:
+			Students = CourseStudent.objects.filter(course = course).order_by('-created_at')[:10]
 
-	
+		elif users_data.user_type==3:
+			Students = CourseStudent.objects.filter(user_student=users_data.id).order_by('-created_at')
+			StudentExist=len(Students)
+			
 	except Course.DoesNotExist:
 		raise Http404("Course does not exist")
 
@@ -87,6 +91,7 @@ def modules(request, pk):
 		'formStudent': courseStudent_form,
 		'Students': Students,
 		'IdInstructor': IdInstructor,
+		'StudentExist':  StudentExist,
 	})
 
 
@@ -210,6 +215,6 @@ def student_add(request):
 			CourseStudent.save()
 
 
-			return modules(request, CourseStudent.course.id)
+			return modules(request, CourseStudent.course.id, CourseStudent.user_student.id)
 	else:
 		return redirect('home')

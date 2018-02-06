@@ -42,7 +42,10 @@ def users_add(request):
 			us_course.set_password(pw)
 			us_course.save()
 
-		return home_users(request)
+			if us_course.user_type == 1:
+				return home_users(request, us_course.id)
+			elif us_course.user_type == 3:
+				return users_detail(request, us_course.id)
 	else:
 		return redirect('home')
 
@@ -58,7 +61,6 @@ def users_detail(request, pk):
 		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')
 
 
-	
 	return render(request, index_template, {
 		'users_data': users_data,
 		'MyCourses': MyCourses,

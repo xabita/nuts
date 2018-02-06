@@ -33,9 +33,7 @@
 
                  
 
-                    {% for lsStudent in Students %}
-                      {{ lsStudent.user_student.id }} 
-                    {% endfor %}
+                    
 
 
                     {% if user.user_type == 3 %}
@@ -45,11 +43,15 @@
                         <input type="hidden" name="user_student" value="{{user.id}}">
                         <input type="hidden" name="course" value="{{IdCourse}}">
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                              <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
+
+                          {% if StudentExist == 0 %}
+                            <div class="row">
+                                <div class="col-xs-12">
+                                  <button type="submit" id="btn_sub" class="save btn btn-default">Inscribirme</button>
+                                </div>
                             </div>
-                        </div>
+                          {%endif%}
+                        
                     </form>
                     {% endif %}
 
@@ -80,17 +82,31 @@
 
                   <div>
                     <label>Alumnos registrados</label>
+                    tt--{{user.id}}
 
                     {% for lsStudent in Students %}
-                      {{ lsStudent.user_student.first_name }} <img src={{lsStudent.user_student.image.url}} style="width:60px; ">
+
+                    rrr-- {{lsStudent.user_student.id}}
+
+                   
+                      {{ lsStudent.user_student.first_name }} <img src={{lsStudent.user_student.image.url}} style="width:55px; ">
                      
                       {% if user.user_type == 2 and lsStudent.user_student.id  == user.id %}
                       <label>Hola ya existe</label>
                       {%endif%}
+
+
+                       {%if lsStudent.user_student.id == user.id %}
+                    
+                    {% endif %}
                  
 
 
                     {% endfor %}
+
+
+
+
                   </div>
 
                   

@@ -8,7 +8,13 @@
   <h2 style="margin-top:5em;">Cursos Disponibles</h2>
   {%for lscourses in list_courses %}
 	  <ul class="list-group">
-	    <li class="list-group-item"><a href="{% url 'modules' pk=lscourses.pk %}">{{ lscourses.name }} ({{ lscourses.description }})</a></li>
+	    <li class="list-group-item">
+	    	{% if user %}
+		    	<a href="{% url 'modules' pk=lscourses.pk IdUser=user.id %}">{{ lscourses.name }} ({{ lscourses.description }})</a>
+	    	{%else%}
+		    	{{ lscourses.name }} ({{ lscourses.description }})
+	    	{%endif%}
+	    </li>
 	  </ul>
   {% endfor %}
 </div>

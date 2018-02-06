@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^courses/add/$', courses_views.add_courses, name='add_courses'),
     url(r'^courses/for_teacher/(?P<pk>[0-9]+)/$', courses_views.my_courses, name='my_courses'),
         
-    url(r'^modules/(?P<pk>[0-9]+)/$', courses_views.modules, name='modules'),
+    url(r'^modules/(?P<pk>[0-9]+)/(?P<IdUser>[0-9]+)/$', courses_views.modules, name='modules'),
     url(r'^modules/new/(?P<pk>[0-9]+)/$', courses_views.modules_new, name='modules_new'),
     url(r'^modules/add/(?P<pk>[0-9]+)/$', courses_views.modules_add, name='modules_add'),
     
