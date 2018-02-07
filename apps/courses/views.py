@@ -63,6 +63,7 @@ def my_courses(request, pk):
 
 def modules(request, pk, IdUser):
 	try:
+		StudentExist=0
 		course = get_object_or_404(Course, pk=pk)
 		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
@@ -76,7 +77,7 @@ def modules(request, pk, IdUser):
 			Students = CourseStudent.objects.filter(course = course).order_by('-created_at')[:10]
 
 		elif users_data.user_type==3:
-			Students = CourseStudent.objects.filter(user_student=users_data.id).order_by('-created_at')
+			Students = CourseStudent.objects.filter(user_student=users_data.id, course=course).order_by('-created_at')
 			StudentExist=len(Students)
 			
 	except Course.DoesNotExist:
@@ -97,8 +98,7 @@ def modules(request, pk, IdUser):
 
 def modules_new(request,pk):
 	index_template = "app/modules_new.html"
-	coursesmodule_form = CourseModuleForm()
-		
+	coursesmodule_form = CourseModuleForm()	
 	
 	return render(request, index_template,{
 		'title_page': 'Nuts',

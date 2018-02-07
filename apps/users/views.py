@@ -41,11 +41,12 @@ def users_add(request):
 			pw = us_course.password
 			us_course.set_password(pw)
 			us_course.save()
+			IdUsuer= us_course.id
 
 			if us_course.user_type == 1:
 				return home_users(request, us_course.id)
-			elif us_course.user_type == 3:
-				return users_detail(request, us_course.id)
+			else:
+				return users_detail(request, IdUsuer)
 	else:
 		return redirect('home')
 
@@ -60,9 +61,12 @@ def users_detail(request, pk):
 	else:
 		MyCourses = Course.objects.filter(usercourse=pk).order_by('-created_at')
 
+	noCourses = len(MyCourses)
+
 
 	return render(request, index_template, {
 		'users_data': users_data,
 		'MyCourses': MyCourses,
+		'noCourses': noCourses,
 		'title_page': 'Nuts'
 	})

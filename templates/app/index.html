@@ -9,7 +9,7 @@
   {%for lscourses in list_courses %}
 	  <ul class="list-group">
 	    <li class="list-group-item">
-	    	{% if user %}
+	    	{% if user.is_authenticated is True %}
 		    	<a href="{% url 'modules' pk=lscourses.pk IdUser=user.id %}">{{ lscourses.name }} ({{ lscourses.description }})</a>
 	    	{%else%}
 		    	{{ lscourses.name }} ({{ lscourses.description }})

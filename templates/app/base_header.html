@@ -71,12 +71,6 @@
                            
                             {% endif %}
 
-
-                           
-
-{{user.user_type}}
-
-{{user.id}}
                            
                             {% if user.user_type == 2 or user.user_type == 3 %}
                                 <li>
@@ -94,7 +88,7 @@
 
                             {% if user.is_authenticated is False %}
                             <li>
-                                <a href="{% url 'users_new' %}">Registrarme</a>
+                                <a href="{% url 'users_new' %}">Registro</a>
                             </li>
                             <li>
                                 <a href="{% url 'login' %}">Iniciar sesion</a>

@@ -11,34 +11,38 @@
             <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="login-reg-form"> 
                     {% if users_data%}
-                    <h1 style="margin-top:4em;">{{users_data.first_name}} {{users_data.last_name}} </h1>
+                    <h2 style="margin-top:4em;">Perfil de {{users_data.first_name}} {{users_data.last_name}}</h2>
             
                     <div></div>
                     <div> </div>
                     <div>
                         <img src={{ users_data.image.url }} style="width:350px; ">
                     </div>
+                    <div><h3 style="margin-top:1em;">Correo electrónico: {{users_data.email}}</h3></div>
+                    <div><h3 style="margin-top:1em;">Tipo: {{users_data.user_type}}</h3></div>
+                    <div><h3 style="margin-top:1em;">Usuario: {{users_data.email}}</h3></div>
 
-                    <div>Tipo User- {{users_data.user_type}}</div>
 
-                    <div>Tipo ID - {{users_data.user_type}}</div>
-
-                        {% if users_data.user_type == 2 %}
+                         {% if users_data.user_type == 2 %}
                          <h2>Cursos impartidos</h2>
                             {%for courseUser in MyCourses%}
                                 <a href="{% url 'modules' pk=courseUser.id IdUser=users_data.id %}">
                                     <div><h4>{{courseUser.name}}  ({{ courseUser.description }})</h4></div>
                                 </a>
                             {%endfor%}
-                          
 
                         {% elif users_data.user_type == 3 %}
-                            <h2>Mis cursos</h2>
-                            {%for courseUser in MyCourses%}
-                                <a href="{% url 'modules' pk=courseUser.course.id IdUser=users_data.id %}">
-                                    <div><h4>{{courseUser.course.name}}</h4></div>
-                                </a>
-                            {%endfor%}
+                            {%if noCourses > 0 %}
+                                <h2>Mis cursos</h2>
+                                    {%for courseUser in MyCourses%}
+                                        <a href="{% url 'modules' pk=courseUser.course.id IdUser=users_data.id %}">
+                                            <div><h4>{{courseUser.course.name}}</h4></div>
+                                        </a>
+                                    {%endfor%}
+                            {%else%}
+                                <h2>Aún no está isncrito en ningun curso</h2>
+                            {%endif%}
+                            
                         {%endif%}
 
                     {% endif%}
