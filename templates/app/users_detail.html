@@ -11,7 +11,7 @@
             <div class="col-md-8 col-md-offset-2 col-xs-12">
                 <div class="login-reg-form"> 
                     {% if users_data%}
-                    <h2 style="margin-top:4em;">Perfil de {{users_data.first_name}} {{users_data.last_name}}</h2>
+                    <h2 style="margin-top:4em;">Perfil de {{users_data.first_name}} {{users_data.last_name}}({{users_data.username}})</h2>
             
                     <div></div>
                     <div> </div>
@@ -19,8 +19,8 @@
                         <img src={{ users_data.image.url }} style="width:350px; ">
                     </div>
                     <div><h3 style="margin-top:1em;">Correo electrónico: {{users_data.email}}</h3></div>
-                    <div><h3 style="margin-top:1em;">Tipo: {{users_data.user_type}}</h3></div>
-                    <div><h3 style="margin-top:1em;">Usuario: {{users_data.email}}</h3></div>
+                    <div><h3 style="margin-top:1em;">Tipo: {{users_data.get_user_type_display}}</h3></div>
+                    <div><h3 style="margin-top:1em;">Usuario: {{users_data.username}}</h3></div>
 
 
                          {% if users_data.user_type == 2 %}
@@ -33,7 +33,8 @@
 
                         {% elif users_data.user_type == 3 %}
                             {%if noCourses > 0 %}
-                                <h2>Mis cursos</h2>
+                            <br>
+                                <h1>Mis cursos</h1>
                                     {%for courseUser in MyCourses%}
                                         <a href="{% url 'modules' pk=courseUser.course.id IdUser=users_data.id %}">
                                             <div><h4>{{courseUser.course.name}}</h4></div>

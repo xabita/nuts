@@ -45,7 +45,11 @@ def add_courses(request):
 			resource_user = UserCourse.objects.get(pk=resource_us)
 			course.usercourse = resource_user
 			course.save()
-			return modules(request, course.id)
+			
+			UsId= request.POST.get('UserId')
+			UserId = UserCourse.objects.get(pk=UsId)
+			
+			return modules(request, course.id, UserId.id)
 	else:
 		return redirect('home')
 
@@ -67,15 +71,13 @@ def modules(request, pk, IdUser):
 		course = get_object_or_404(Course, pk=pk)
 		list_courses = Course.objects.filter(pk=pk).order_by('-created_at')
 		modules = CourseModule.objects.filter(course = course).order_by('-created_at')[:10]
-		no_modules= len(modules)
 		IdCourse=course.id
 		IdInstructor=course.usercourse.id
 		courseStudent_form = CourseStudentForm()
 
 		users_data = UserCourse.objects.get(pk=IdUser)
-		if users_data.user_type==2:
+		if users_data.user_type==1 or users_data.user_type==2:
 			Students = CourseStudent.objects.filter(course = course).order_by('-created_at')[:10]
-
 		elif users_data.user_type==3:
 			Students = CourseStudent.objects.filter(user_student=users_data.id, course=course).order_by('-created_at')
 			StudentExist=len(Students)
@@ -87,7 +89,6 @@ def modules(request, pk, IdUser):
 		'modules': modules,
 		'list_courses': list_courses,
 		'title_page': Course.name,
-		'no_modules': no_modules,
 		'IdCourse': IdCourse,
 		'formStudent': courseStudent_form,
 		'Students': Students,

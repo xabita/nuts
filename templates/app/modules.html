@@ -11,8 +11,6 @@
 <div class="page-section section pt-100 pb-100">
     <div class="container">
         <div class="row">
-
-           
             <div class="col-md-8 col-md-offset-2 col-xs-12">
               <h2 style="margin-top:4em;"> 
                 {% for cur in list_courses %}
@@ -20,21 +18,15 @@
                 {% endfor %}
               </h2> 
                 <div class="login-reg-form">
-
                 
-                  {% if no_modules > 0 %}
-                  <h3 style="margin-top:2em;">Modulos</h3>
+                  {% if modules %}
+                    <h3 style="margin-top:2em;">Modulos</h3>
               
                     {% for c_mod in modules %}
                         <ul class="list-group">
                           <li class="list-group-item"><a href="{% url 'resources' pk=c_mod.pk %}">{{ c_mod.id }}    {{ c_mod.name }} ({{ c_mod.description }})</a></li>
                         </ul>
                     {% endfor %}
-
-                 
-
-                    
-
 
                     {% if user.user_type == 3 %}
                     <form class="post-form" method="POST" action="{% url 'student_add'%}">
@@ -54,8 +46,6 @@
                         
                     </form>
                     {% endif %}
-
-                  
                   {% else %}
                     <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
@@ -81,14 +71,15 @@
                   {% endif %}
 
                   <div>
-                    <label>Alumnos registrados</label>
-                    tt--{{user.id}}
+                    {% if Students %}
+                        Number of athletes: {{ Students|length }}
+                        <label>Alumnos registrados</label>
+                    {% endif %}
 
+                    
+                    
                     {% for lsStudent in Students %}
 
-                    rrr-- {{lsStudent.user_student.id}}
-
-                   
                       {{ lsStudent.user_student.first_name }} <img src={{lsStudent.user_student.image.url}} style="width:55px; ">
                      
                       {% if user.user_type == 2 and lsStudent.user_student.id  == user.id %}
@@ -96,21 +87,11 @@
                       {%endif%}
 
 
-                       {%if lsStudent.user_student.id == user.id %}
+                      {%if lsStudent.user_student.id == user.id %}
                     
-                    {% endif %}
-                 
-
-
+                      {% endif %}
                     {% endfor %}
-
-
-
-
                   </div>
-
-                  
-                  
                 </div>
             </div>
         </div>

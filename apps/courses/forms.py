@@ -8,6 +8,11 @@ from pagedown.widgets import AdminPagedownWidget
 # CONTENT FORMS
 # -----------------------------------------------------------------------------
 class CourseForm(forms.ModelForm):
+	name = 	forms.CharField(
+					widget=forms.TextInput(attrs={'class': 'form-control'}),
+					label="Nombre curso",
+				)
+
 	description = 	forms.CharField(
 					widget=forms.Textarea(attrs={'class': 'form-control'}),
 					label="Descripción",

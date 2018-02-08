@@ -5,16 +5,16 @@
 {% block content %}
 
 <div class="container">
-  <h2 style="margin-top:5em;">Usuarios registrados</h2>
+  <h2 style="margin-top:5em;">Comunidad Nuts</h2>
   {%for lsusers in list_users %}
   <ul class="list-group">
     <li class="list-group-item">
     	{% if lsusers.user_type == 1 %}
-    		Admin<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
+    		<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Admin
 	    {% elif lsusers.user_type == 2 %}
-		    Maestro<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
+		    <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Maestro
     	{% elif lsusers.user_type == 3 %}
-		   Alumno <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} ID- {{ lsusers.id }}</a>
+		    <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Alumno
     	{% endif %}
 
     </li>
