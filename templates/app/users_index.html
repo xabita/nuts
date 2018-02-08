@@ -9,14 +9,7 @@
   {%for lsusers in list_users %}
   <ul class="list-group">
     <li class="list-group-item">
-    	{% if lsusers.user_type == 1 %}
-    		<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Admin
-	    {% elif lsusers.user_type == 2 %}
-		    <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Maestro
-    	{% elif lsusers.user_type == 3 %}
-		    <a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.first_name }} {{ lsusers.last_name }} </a>Alumno
-    	{% endif %}
-
+    		<a href="{% url 'users_detail' pk=lsusers.id %}">{{ lsusers.get_user_type_display }} | {{ lsusers.first_name }} {{ lsusers.last_name }}</a>
     </li>
   </ul>
   {% endfor %}

@@ -16,7 +16,7 @@ from .managers import UserManager
 
 USER_CHOICES = (
     (1, 'Administrador'),
-    (2, 'Instructor'),
+    (2, 'Maestro'),
     (3, 'Estudiante'),
 )
    

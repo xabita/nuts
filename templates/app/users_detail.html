@@ -18,12 +18,11 @@
                     <div>
                         <img src={{ users_data.image.url }} style="width:350px; ">
                     </div>
-                    <div><h3 style="margin-top:1em;">Correo electrónico: {{users_data.email}}</h3></div>
                     <div><h3 style="margin-top:1em;">Tipo: {{users_data.get_user_type_display}}</h3></div>
+                    <div><h3 style="margin-top:1em;">Correo electrónico: {{users_data.email}}</h3></div>
                     <div><h3 style="margin-top:1em;">Usuario: {{users_data.username}}</h3></div>
 
-
-                         {% if users_data.user_type == 2 %}
+                        {% if users_data.user_type == 2 %}
                          <h2>Cursos impartidos</h2>
                             {%for courseUser in MyCourses%}
                                 <a href="{% url 'modules' pk=courseUser.id IdUser=users_data.id %}">

@@ -50,6 +50,11 @@
                     <h3>No se ha registrado ningún módulo</h3>
                   {% endif %}
 
+
+
+
+
+
                   {% if user.user_type == 2 and IdInstructor == user.id %}
                   <form class="post-form" method="POST" action="{% url 'modules_new' pk=IdCourse %}">
                       {% csrf_token %}
@@ -72,25 +77,26 @@
 
                   <div>
                     {% if Students %}
-                        Number of athletes: {{ Students|length }}
-                        <label>Alumnos registrados</label>
+                        <h3 style="margin-top:2em;">Alumnos registrados</h3>
+                    
+                    
+                    
+                      {% for lsStudent in Students %}
+
+                        <div>
+                          <img src={{lsStudent.user_student.image.url}} style="width:55px; "> {{ lsStudent.user_student.first_name }} {{ lsStudent.user_student.last_name }}
+                        </div> 
+                       
+                        {% if user.user_type == 2 and lsStudent.user_student.id  == user.id %}
+                        <label>Hola ya existe</label>
+                        {%endif%}
+
+
+                        {%if lsStudent.user_student.id == user.id %}
+                      
+                        {% endif %}
+                      {% endfor %}
                     {% endif %}
-
-                    
-                    
-                    {% for lsStudent in Students %}
-
-                      {{ lsStudent.user_student.first_name }} <img src={{lsStudent.user_student.image.url}} style="width:55px; ">
-                     
-                      {% if user.user_type == 2 and lsStudent.user_student.id  == user.id %}
-                      <label>Hola ya existe</label>
-                      {%endif%}
-
-
-                      {%if lsStudent.user_student.id == user.id %}
-                    
-                      {% endif %}
-                    {% endfor %}
                   </div>
                 </div>
             </div>
